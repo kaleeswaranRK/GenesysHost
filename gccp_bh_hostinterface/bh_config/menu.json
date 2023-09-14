@@ -1,0 +1,708 @@
+{
+	"DynamicMenu": {
+		"country": {
+			"name": "HONGKONG",
+				"entry": [
+					
+				   {
+						"key": "MNU_BBSER_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "SAV_TIME_DP_003,CC_SER_002,PER_MOR_LOAN_SER_004,INV_INS_SER_005,ONL_MOB_BAN_SER_006,TK_TO_CCA_000",
+						"grammars": "1,2,3,4,5,0",
+						"nextNode": "SF~SUB_SAVINGS,SF~BBAUTH,SF~BBAUTH,SF~BBAUTH,SF~BBAUTH,agent_transfer",
+						"stateID": "ACCOUNT_ENQUIRY_MENU",
+						"menusDescription": "ACCOUNT_ENQUIRY_MENU_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					 {
+						"key": "MNU_SVGTDSER_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "CASA_ACC_ENQ_FTFR,TD_ACC_ENQ_TXN,CHQ_SER_004,INW_REMIT_SWFT,NEW_ACC_OPN,TK_TO_CCA_000",
+						"grammars": "1,2,3,4,5,0",
+						"nextNode": "NM~MNU_CASAACBALTRNHIS_01,NM~MNU_TDRS_01,NM~MNU_CS_01,NM~MNU_INWARD_REMIT_01,agent_transfer,agent_transfer",
+						"stateID": "ACCOUNT_ENQUIRY_MENU",
+						"menusDescription": "ACCOUNT_ENQUIRY_MENU_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					 {
+						"key": "MNU_SVGTDSER_02",
+					"value": {
+						"bargein": "true",
+						"prompts": "CASA_ACC_ENQ_FTFR,TD_ACC_ENQ_TXN,INW_REMIT_SWFT,NEW_ACC_OPN,TK_TO_CCA_000",
+						"grammars": "1,2,4,5,0",
+						"nextNode": "NM~MNU_CASAACBALTRNHIS_01,NM~MNU_TDRS_01,NM~MNU_INWARD_REMIT_01,agent_transfer,agent_transfer",
+						"stateID": "ACCOUNT_ENQUIRY_MENU",
+						"menusDescription": "ACCOUNT_ENQUIRY_MENU_SERVICES_2",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_CCSER_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "STEBALTRNEN,CC_PT_AUTOPAY,360_REWARDS_003,CRE_LINE_MAIN_004,AAVS,TK_TO_CCA_000",
+						"grammars": "1,2,3,4,5,0",
+						"nextNode": "SF~STMT_BAL_AND_TRANS_ENQ ,SF~MCCL,NM~MNU_360REWARDS_01,SF~CC_LIMIT_INCREASE,SF~AAVSMAINCAN_01,agent_transfer",
+						"stateID": "ACCOUNT_ENQUIRY_MENU",
+						"menusDescription": "ACCOUNT_ENQUIRY_MENU_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_CCPAUTOPAYFLXIUTI_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "SCB_AC_FPPAY_001,AUTO_PAY_MAINTEN_002,AUTO_PAY_ENR_003,UTI_BILL_PAY_CC_005,FLX_PAY_INS_004",
+						"grammars": "1,2,3,4,5",
+						"nextNode": "SF~CC_PAYMENT,SF~AUTO_FLEXI_INST,agent_transfer,NM~MNU_UTIBILLPAY_01,SF~AUTO_FLEXI_INST_4",
+						"stateID": "ACCOUNT_ENQUIRY_MENU",
+						"menusDescription": "ACCOUNT_ENQUIRY_MENU_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_CCPAUTOPAYFLXIUTI_02",
+					"value": {
+						"bargein": "true",
+						"prompts": "AUTO_PAY_MAINTEN_002,AUTO_PAY_ENR_003,UTI_BILL_PAY_CC_005,FLX_PAY_INS_004",
+						"grammars": "2,3,4,5",
+						"nextNode": "SF~AUTO_FLEXI_INST,agent_transfer,NM~MNU_UTIBILLPAY_01,SF~AUTO_FLEXI_INST_4",
+						"stateID": "ACCOUNT_ENQUIRY_MENU",
+						"menusDescription": "ACCOUNT_ENQUIRY_MENU_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_CCPAUTOPAYFLXIUTI_03",
+					"value": {
+						"bargein": "true",
+						"prompts": "SCB_AC_FPPAY_001,AUTO_PAY_MAINTEN_002,AUTO_PAY_ENR_003,UTI_BILL_PAY_CC_005",
+						"grammars": "1,2,3,4",
+						"nextNode": "SF~CC_PAYMENT,SF~AUTO_FLEXI_INST,agent_transfer,NM~MNU_UTIBILLPAY_01",
+						"stateID": "ACCOUNT_ENQUIRY_MENU",
+						"menusDescription": "ACCOUNT_ENQUIRY_MENU_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_CCPAUTOPAYFLXIUTI_04",
+					"value": {
+						"bargein": "true",
+						"prompts": "AUTO_PAY_MAINTEN_002,AUTO_PAY_ENR_003,UTI_BILL_PAY_CC_005",
+						"grammars": "2,3,4",
+						"nextNode": "SF~AUTO_FLEXI_INST,agent_transfer,NM~MNU_UTIBILLPAY_01",
+						"stateID": "ACCOUNT_ENQUIRY_MENU",
+						"menusDescription": "ACCOUNT_ENQUIRY_MENU_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_INWARD_REMIT_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "INW_REMIT_TXN_ENQ,SWIFT_ENQ",
+						"grammars": "1,2",
+						"nextNode": "SF~INWARD_REM,SF~SWIFT_CODE",
+						"stateID": "INWARD_REMITANCE_MENU",
+						"menusDescription": "INWARD_REMITANCE_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},	{
+						"key": "MNU_DIGITAL_BANKING_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "OB_SER,MOB_WAL_SER,PH_BNKG_SER",
+						"grammars": "1,2,3",
+						"nextNode": "NM~MNU_ONLB_001,agent_transfer,SF~PHONE_BANKING_SERVICES",
+						"stateID": "DIGITAL_BANKING_AND_PIN_SERVICES_MENU",
+						"menusDescription": "DIGITAL_BANKING_AND_PIN_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},  {
+						"key": "MNU_ONLB_001",
+					"value": {
+						"bargein": "true",
+						"prompts": "OB_REG_RETRY_UNBL,OB_LOGIN_RETRY_UNBL,OB_CAN,SC_MOB_DEV_DEREG",
+						"grammars": "1,2,3,4",
+						"nextNode": "agent_transfer,agent_transfer,agent_transfer,agent_transfer",
+						"stateID": "DIGITAL_BANKING_AND_PIN_SERVICES_MENU",
+						"menusDescription": "ONLINE_BANKING_SERVICE",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					}, {
+						"key": "PHONE_BANKING_SERVICES",
+					"value": {
+						"bargein": "true",
+						"prompts": "PB_PIN_CHG,PB_PIN_RTRY_RSET,PB_PIN_SET",
+						"grammars": "1,2,3",
+						"nextNode": "SF~TPIN_CHANGE,agent_transfer,agent_transfer",
+						"stateID": "DIGITAL_BANKING_AND_PIN_SERVICES_MENU",
+						"menusDescription": "ONLINE_BANKING_SERVICE",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					}, {
+						"key": "MNU_PHB_001",
+					"value": {
+						"bargein": "true",
+						"prompts": "PB_PIN_SET",
+						"grammars": "1",
+						"nextNode": "agent_transfer",
+						"stateID": "DIGITAL_BANKING_AND_PIN_SERVICES_MENU",
+						"menusDescription": "ONLINE_BANKING_SERVICE",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},{
+						"key": "MNU_DIGITAL_BANKING_02",
+					"value": {
+						"bargein": "true",
+						"prompts": "OB_SER,MOB_WAL_SER",
+						"grammars": "1,2",
+						"nextNode": "NM~MNU_ONLINE_BANKING_SVC_01,agent_transfer",
+						"stateID": "DIGITAL_BANKING_AND_PIN_SERVICES_MENU_2",
+						"menusDescription": "DIGITAL_BANKING_AND_PIN_SERVICES_2",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					
+					{
+						"key": "MNU_PHONE_BKG_SVC_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "VB_ENROL,PB_PIN_CHG,PB_PIN_RTRY_RSET,PB_PIN_SET",
+						"grammars": "1,2,3,4",
+						"nextNode": "agent_transfer,SF~TPIN_CHANGE,agent_transfer,agent_transfer",
+						"stateID": "ACCOUNT_ENQUIRY_MENU",
+						"menusDescription": "ACCOUNT_ENQUIRY_MENU_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					
+					{
+						"key": "MNU_ONLINE_BANKING_SVC_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "OB_REG_RETRY_UNBL,OB_LOGIN_RETRY_UNBL,OB_CAN,SC_MOB_DEV_DEREG",
+						"grammars": "1,2,3,4",
+						"nextNode": "SF~ONLINE_BANKING,SF~ONLINE_BANKING,SF~ONLINE_BANKING,SF~ONLINE_BANKING",
+						"stateID": "ACCOUNT_ENQUIRY_MENU",
+						"menusDescription": "ACCOUNT_ENQUIRY_MENU_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					
+					{
+						"key": "MNU_TDRS_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "MAT_INS_ENQ,CHG_MAT_INS,SET_NEW_TD",
+						"grammars": "1,2,3",
+						"nextNode": "SF~MATURITY_INST_ENQUIRY,SF~CHANGE_MATURITY_INST,agent_transfer",
+						"stateID": "ACCOUNT_ENQUIRY_MENU",
+						"menusDescription": "ACCOUNT_ENQUIRY_MENU_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_CS_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "CHQ_STAT_ENQ,STP_CHQ,CHQ_BK_REQ",
+						"grammars": "1,2,3",
+						"nextNode": "SF~CHEQUE_STATUS_ENQ,agent_transfer,SF~CHEQUE_BOOK_ORD",
+						"stateID": "CHEQUE_SERVICE_MENU",
+						"menusDescription": "CHEQUE_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_CASAACBALTRNHIS_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "CASA_AC_BAL_001,CASA_TRN_HIS_002,CASA_AC_FUND_TFR,UTILITY_BILL_PAY_REL_SER",
+						"grammars": "1,2,3,4",
+						"nextNode": "SF~CASA_ACC_BALANCE,SF~CASA_TRN_HISTORY,NM~MNU_CAFT_01,NM~MNU_UTIBILLPAY_01",
+						"stateID": "CASA_ACCOUNT_ENQUIRY_AND_FUND_TRANSFER_MENU",
+						"menusDescription": "CASA_ACCOUNT_ENQUIRY_AND_FUND_TRANSFER_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					
+					{
+						"key": "MNU_CAFT_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "TRN_FUND_OWN,TRN_FUND_THIRD_PARTY,FUND_TRAN_SCB_CARD_PAYMENT",
+						"grammars": "1,2,3",
+						"nextNode": "SF~FUND_TRANSFER_OWN_ACC,SF~FUND_TRANSFER_THIRD_PARTY,SF~CC_PAYMENT",
+						"stateID": "CASA_ACCOUNT_FUND_TRANSFER_MENU",
+						"menusDescription": "CASA_ACCOUNT_FUND_TRANSFER_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_UTIBILLPAY_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "UTI_BILL_PAY_SA.001,UTI_BILL_PAY_CC.002,UTI_REG_ENQ,OTH_UTI_SER",
+						"grammars": "1,2,3,4",
+						"nextNode": "SF~UTIL_PAY_CASA,SF~UTILITY_BILL_PAY_CC,SF~UTIL_REG_ENQ,SF~CANCEL_UTIL_REG",
+						"stateID": "UTILITY_BILL_PAYMENT_AND_RELATED_SERVICE_MENU",
+						"menusDescription": "UTILITY_BILL_PAYMENT_AND_RELATED_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_REG_ENQ_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "BP_REG_DEP,BP_REG_CC",
+						"grammars": "1,2",
+						"nextNode": "SF~REG_ENQ,SF~REG_ENQ",
+						"stateID": "REGISTRATION_ENQUIRY_MENU",
+						"menusDescription": "REGISTRATION_ENQUIRY_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_STBAL_TXN_ENQ_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "ST_BAL_AVL",
+						"grammars": "1",
+						"nextNode": "SF~SMT_BAL_AVL_LIMIT",
+						"stateID": "REGISTRATION_ENQUIRY_MENU",
+						"menusDescription": "REGISTRATION_ENQUIRY_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_STBAL_TXN_ENQ_02",
+					"value": {
+						"bargein": "true",
+						"prompts": "OUT_BAL_AVL",
+						"grammars": "2",
+						"nextNode": "SF~OUT_BAL_AVL_LIMIT",
+						"stateID": "REGISTRATION_ENQUIRY_MENU",
+						"menusDescription": "REGISTRATION_ENQUIRY_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_FLEXIPAYSER_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "AUTOPAYENROL,AUTOPAYINST,AUTOPAYCAN",
+						"grammars": "1,2,3",
+						"nextNode": "agent_transfer,SF~AUTO_FLEXI_INST,agent_transfer",
+						"stateID": "REGISTRATION_ENQUIRY_MENU",
+						"menusDescription": "REGISTRATION_ENQUIRY_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_BB_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "BB_GEN_BKG_SER,BB_TRDE_SER,BB_NEW_AC_SER,BB_ELNC_BKG_SER,BB_REMIT_OTH_SER",
+						"grammars": "1,2,3,4,5",
+						"nextNode": "SF~BB_Auth,SF~TRADESERVICE,agent_transfer,SF~ELECTRONICBANKINGSERVICE,SF~TRADESERVICE",
+						"stateID": "REGISTRATION_ENQUIRY_MENU",
+						"menusDescription": "REGISTRATION_ENQUIRY_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+						{
+						"key": "MNU_MORPERLN_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "PER_LOAN_SER_001,MOR_LOAN_SER_001",
+						"grammars": "1,2",
+						"nextNode": "SF~PERSONAL_LOAN,SF~MORTGAGELOAN",
+						"stateID": "Personal and Mortgage Loan Service",
+						"menusDescription": "REGISTRATION_ENQUIRY_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_INSINV_001",
+					"value": {
+						"bargein": "true",
+						"prompts": "FOR_INV_SER,FOR_INS_SER",
+						"grammars": "1,2",
+						"nextNode": "NM~MNU_INV_001,SF~INS_SERVC",
+						"stateID": "Investment and Insurance Servie",
+						"menusDescription": "REGISTRATION_ENQUIRY_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_INV_001",
+					"value": {
+						"bargein": "true",
+						"prompts": "STK_TRDG_SEC_SER,WLTH_MGT_SER,TK_TO_CCA_000",
+						"grammars": "1,2,0",
+						"nextNode": "SF~SEC_HOTLINE,NM~MNU_WEALTH_001,agent_transfer",
+						"stateID": "Investment and Insurance Servie",
+						"menusDescription": "REGISTRATION_ENQUIRY_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_CCFW_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "ANN_FEE_WAIVER_001,LATE_FEE_WAIVER_002",
+						"grammars": "1,2",
+						"nextNode": "SF~CC_FEE_WAIVER,SF~CC_LATE_FEE_WAIVER",
+						"stateID": "Credit and Fee Waiver",
+						"menusDescription": "CREDIT_CARD_FEE_WAIVER",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_WEALTH_001",
+					"value": {
+						"bargein": "true",
+						"prompts": "FR_UT_SER,FR_PRE_DEP,FR_DEBT_SEC,FR_STR_INV_SE,GO_TO_PREMENU",
+						"grammars": "1,2,3,4,8",
+						"nextNode": "NM~MNU_WEALTH_002,agent_transfer,agent_transfer,SF~STRUCTURED_INVSTS,NM~MNU_INV_001",
+						"stateID": "Insurance_Investment",
+						"menusDescription": "Insurance_Investment",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_WEALTH_002",
+					"value": {
+						"bargein": "true",
+						"prompts": "FR_UT_AC_BAL_ENQ,FR_FND_PRI_ENQ,FR_FND_TRDG",
+						"grammars": "1,2,3",
+						"nextNode": "SF~DGTL_EDN_WLTH_MGMT,SF~DGTL_EDN_WLTH_MGMT,SF~WEALTH_FUNDTRADE",
+						"stateID": "Insurance_Investment",
+						"menusDescription": "Insurance_Investment",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_STRD_INV_SER",
+					"value": {
+						"bargein": "true",
+						"prompts": "MAT_INS_ENQ,CHG_MAT_INS",
+						"grammars": "1,2",
+						"nextNode": "SF~MATURITY_INST_ENQUIRY,SF~CHANGE_MATURITY_INST",
+						"stateID": "Insurance_Investment",
+						"menusDescription": "Insurance_Investment",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_INS_001",
+					"value": {
+						"bargein": "true",
+						"prompts": "INS_APP,INS_AFTR_SLS_SER,GO_TO_PREMENU,TK_TO_CCA_000",
+						"grammars": "1,2,8,0",
+						"nextNode": "NM~MNU_INS_002,NM~MNU_INS_003,SF~INV_INS,agent_transfer",
+						"stateID": "Investment and Insurance Servie",
+						"menusDescription": "REGISTRATION_ENQUIRY_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_INS_002",
+					"value": {
+						"bargein": "true",
+						"prompts": "APP_FRE_INS,MRTG_LFE_INS",
+						"grammars": "1,2",
+						"nextNode": "agent_transfer,agent_transfer",
+						"stateID": "Investment and Insurance Servie",
+						"menusDescription": "REGISTRATION_ENQUIRY_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_INS_003",
+					"value": {
+						"bargein": "true",
+						"prompts": "FR_LFE_INS,FR_GEN_INS",
+						"grammars": "1,2",
+						"nextNode": "agent_transfer,agent_transfer",
+						"stateID": "Investment and Insurance Servie",
+						"menusDescription": "REGISTRATION_ENQUIRY_SERVICES",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},{
+						"key": "MNU_BB_05",
+					"value": {
+						"bargein": "true",
+						"prompts": "CASAACCBALTRNHIS,FUNDTRANBTSCBAC,TIMEDEPOSITSER,CHQ_SER_004,GOTO_MAINMENU,TK_TO_CCA_000",
+						"grammars": "1,2,3,4,9,0",
+						"nextNode": "NM~MNU_BB_06,NM~MNU_BB_07,NM~MNU_TDRS_01,NM~MNU_CS_01,NM~MNU_BB_01,agent_transfer",
+						"stateID": "BB_MENU_05",
+						"menusDescription": "Insurance_Investment",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},	
+					{
+						"key": "MNU_BB_06",
+					"value": {
+						"bargein": "true",
+						"prompts": "AC_BAL,AC_TXN_HIS",
+						"grammars": "1,2",
+						"nextNode": "SF~CASA_ACC_BALANCE,SF~CASA_TRN_HISTORY",
+						"stateID": "BB_MENU_06",
+						"menusDescription": "Insurance_Investment",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},	
+					{
+						"key": "MNU_BB_07",
+					"value": {
+						"bargein": "true",
+						"prompts": "RN_FUND_OWN,TRN_FUND_THIRD_PARTY,UTILITY_BILL_PAY_REL_SER",
+						"grammars": "1,2,3",
+						"nextNode": "SF~FUND_TRANSFER_OWN_ACC,SF~FUND_TRANSFER_THIRD_PARTY,NM~MNU_UTIBILLPAY_01",
+						"stateID": "BB_MENU_07",
+						"menusDescription": "Insurance_Investment",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},
+					{
+						"key": "MNU_CCAPPSNCUSEN_01",
+					"value": {
+						"bargein": "true",
+						"prompts": "CCAPPSTATUSEN,NEWCUSEN",
+						"grammars": "1,2",
+						"nextNode": "agent_transfer,NM~MNU_NEWCUST_001",
+						"stateID": "MNU_CCAPPSNCUSEN_01",
+						"menusDescription": "Insurance_Investment",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					},	
+					{
+						"key": "MNU_NEWCUST_001",
+					"value": {
+						"bargein": "true",
+						"prompts": "SVG_TD_AC_OP,CC_APP,PL_APP,MOR_LO,INV_INS,NEW_BK_SER",
+						"grammars": "1,2,3,4,5,6",
+						"nextNode": "agent_transfer,agent_transfer,agent_transfer,agent_transfer,agent_transfer,agent_transfer",
+						"stateID": "MNU_NEWCUST_001",
+						"menusDescription": "Insurance_Investment",
+						"noInput": "NO_INPUT_001:NO_INPUT_001",
+						"noMatch": "INVALID_INPUT_001:INVALID_INPUT_001",
+						"maxtries": "MAX_RETRY_001",
+						"maxTriesNextNode": "MainMenu",
+						"retry": "3",
+						"timeOut": "3"
+						}
+					}
+
+					
+					
+				]
+			}
+		}
+}

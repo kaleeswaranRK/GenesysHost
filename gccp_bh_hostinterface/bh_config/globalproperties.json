@@ -1,0 +1,11 @@
+{
+  "noinput": "NO_INPUT_001:NO_INPUT_001",
+  "nomatch": "INVALID_INPUT:INVALID_INPUT",
+  "maxtries": "MAX_RETRY_001",
+  "retry": "3",
+  "vdn":"1238",
+  "audio_location":"http://10.23.228.10:8085/cupd/prompts/",
+  "standard_audio_location":"http://10.23.228.10:9807/hk/standard/prompts/",
+  "hotline_numbers_CCA":"22670128,22324008",
+  "hotline_numbers_MCCL":"22108810,29027418"
+}

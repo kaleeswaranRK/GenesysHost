@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN"
+	packages="com.scb.ivr.mask.logs" monitorInterval="900">
+	<Properties>
+		<Property name="log-path">${sys:log4jpath}</Property>
+		<Property name="host-name">${hostName}</Property> 
+		<Property name="profile">${sys:spring.profiles.active}</Property>
+	</Properties> 
+	<Appenders>
+
+		<!-- console appender -->
+		<!-- <Console name="console-log" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n" />
+		</Console> -->
+		<Console name="console-log" target="SYSTEM_OUT">
+			<PatternLayout>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %spi%n</pattern>
+		<!--<pattern>{"timestamp":"%d{ISO8601}","thread":"%t","level":"%p","loggerName":"%c","file":"%F","line":"%L","message":"%m"}spi%n</pattern> -->
+			</PatternLayout>
+		</Console> 
+
+		<!-- file appender -->
+		<RollingFile name="trace" fileName="${log-path}/trace.log"
+			filePattern="${log-path}/trace-%d{yyyy-MM-dd-HH}.log">
+			<!-- log pattern -->
+			<PatternLayout>
+				<!-- <pattern>%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n</pattern> -->
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - spi%n</pattern>
+			</PatternLayout>
+
+
+			<!-- set file size policy -->
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<!-- <SizeBasedTriggeringPolicy size="10 MB" /> -->
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+
+
+		<RollingFile name="report"
+			fileName="${log-path}/report.log"
+			filePattern="${log-path}/report-%d{yyyy-MM-dd-HH}.log">
+			<!-- log pattern -->
+			<PatternLayout>
+				<!-- <pattern>%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n</pattern> -->
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - spi%n</pattern>
+			</PatternLayout>
+
+			<!-- set file size policy -->
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<!-- <SizeBasedTriggeringPolicy size="10 MB" /> -->
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+		<!-- file appender -->
+		<RollingFile name="HostLog"
+			fileName="${log-path}/HostLog-${hostName}.log"
+			filePattern="${log-path}/HostLog-${hostName}-%d{yyyy-MM-dd-HH}.log">
+			<!-- log pattern -->
+			<PatternLayout>
+				<!-- <pattern>%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n</pattern> -->
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - spi%n</pattern>
+			</PatternLayout>
+
+			<!-- set file size policy -->
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<!-- <SizeBasedTriggeringPolicy size="10 MB" /> -->
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+		<RollingFile name="HostC400"
+			fileName="${log-path}/HostC400-${hostName}.log"
+			filePattern="${log-path}/HostC400-%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout>
+				<!-- <pattern>%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n</pattern> -->
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - spi%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="HostEbbs"
+			fileName="${log-path}/HostEbbs-${hostName}.log"
+			filePattern="${log-path}/HostEbbs-%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout>
+				<!-- <pattern>%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n</pattern> -->
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - spi%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="HostEuronet"
+			fileName="${log-path}/HostEuronet-${hostName}.log"
+			filePattern="${log-path}/HostEuronet-%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout>
+				<!-- <pattern>%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n</pattern> -->
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - spi%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="HostUAAS"
+			fileName="${log-path}/HostUAAS-${hostName}.log"
+			filePattern="${log-path}/HostUAAS-%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout>
+				<!-- <pattern>%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n</pattern> -->
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - spi%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="HostCASAS"
+			fileName="${log-path}/HostCASAS-${hostName}.log"
+			filePattern="${log-path}/HostCASAS-%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout>
+				<!-- <pattern>%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n</pattern> -->
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - spi%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="HostMDIS"
+			fileName="${log-path}/HostMDIS-${hostName}.log"
+			filePattern="${log-path}/HostMDIS-%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout>
+				<!-- <pattern>%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n</pattern> -->
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - spi%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="HostDB"
+			fileName="${log-path}/HostDB-${hostName}.log"
+			filePattern="${log-path}/HostDB-%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout>
+				<!-- <pattern>%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n</pattern> -->
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - spi%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="HostJunit"
+			fileName="${log-path}/HostJunit-${hostName}.log"
+			filePattern="${log-path}/HostJunit-%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout>
+				<!-- <pattern>%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n</pattern> -->
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - spi%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="DeleteLog"
+			fileName="${log-path}/DeleteLog-${hostName}.log"
+			filePattern="${log-path}/DeleteLog-%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout>
+				<!-- <pattern>%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n</pattern> -->
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - spi%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="HostSessionLog"
+			fileName="${log-path}/HostSessionLog-${hostName}.log"
+			filePattern="${log-path}/HostSessionLog-${hostName}-%d{yyyy-MM-dd-HH}.log">
+			<!-- log pattern -->
+			<PatternLayout>
+				<!-- <pattern>%d{dd/MM/yyyy HH:mm:ss:SSS} %5p - spi%n</pattern> -->
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - spi%n</pattern>
+			</PatternLayout>
+
+			<!-- set file size policy -->
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<!-- <SizeBasedTriggeringPolicy size="10 MB" /> -->
+			</Policies>
+			<DefaultRolloverStrategy max="50" />
+		</RollingFile>
+			</Appenders>
+
+	<Loggers>
+		<Logger name="Dialog.Designer.TraceWriter" level="debug"
+			additivity="false">
+			<appender-ref ref="trace" />			
+			<appender-ref ref="console-log"/>
+		</Logger>
+		<Logger name="HostLog" level="debug" additivity="false">
+			<appender-ref ref="HostLog" />
+			<appender-ref ref="console-log" />
+		</Logger>
+		<Logger name="HostC400" level="debug" additivity="false">
+			<appender-ref ref="HostC400" />
+			<appender-ref ref="console-log" />
+		</Logger>
+		<Logger name="HostEbbs" level="debug" additivity="false">
+			<appender-ref ref="HostEbbs" />
+			<appender-ref ref="console-log" />
+		</Logger>
+		
+		<Logger name="HostEuronet" level="debug" additivity="false">
+			<appender-ref ref="HostEuronet" />
+			<appender-ref ref="console-log" />
+		</Logger>
+		
+		<Logger name="HostUAAS" level="debug" additivity="false">
+			<appender-ref ref="HostUAAS" />
+			<appender-ref ref="console-log" />
+		</Logger>
+		
+		<Logger name="HostCASAS" level="debug" additivity="false">
+			<appender-ref ref="HostCASAS" />
+			<appender-ref ref="console-log" />
+		</Logger>
+		
+		<Logger name="HostMDIS" level="debug" additivity="false">
+			<appender-ref ref="HostMDIS" />
+			<appender-ref ref="console-log" />
+		</Logger>
+		
+		<Logger name="HostDB" level="debug" additivity="false">
+			<appender-ref ref="HostDB" />
+			<appender-ref ref="console-log" />
+		</Logger>
+		
+		<Logger name="HostJunit" level="debug" additivity="false">
+			<appender-ref ref="HostJunit" />
+			<appender-ref ref="console-log" />
+		</Logger>
+		
+		<Logger name="HostSessionLog" level="debug" additivity="false">
+			<appender-ref ref="HostSessionLog" />
+			<appender-ref ref="console-log" />
+		</Logger>
+
+		<Logger name="deletelog" level="debug" additivity="false">
+			<appender-ref ref="DeleteLog" />
+			<appender-ref ref="console-log" />
+		</Logger>
+		
+		<Logger name="Dialog.Designer.ReportWriter" level="debug"
+			additivity="false">
+			<appender-ref ref="report" />
+			<appender-ref ref="console-log"/>
+		</Logger>
+		
+		<Root level="debug" additivity="false">
+			<AppenderRef ref="console-log"/>
+		</Root>
+	</Loggers>
+</Configuration>

@@ -1,0 +1,138 @@
+{
+    "smsTemplate": [
+		{
+            "name": "TPIN_VAL",
+            "english": "SCBHK:For security issue, your PhoneBanking Telephone Idenification Number is currently suspended. Please contract 2886 8888",
+            "mandarin": "渣打香港: 由于保安理由, 阁下的电话理财密码已被停用. 请致电 2886 8888.",
+            "cantonese": "渣打香港: 由於保安理由, 閣下的電話理財密碼已被停用. 請致電 2886 8888."
+        },{
+            "name": "BB_Auth",
+            "english": "SCBHK:For security issue, your PhoneBanking Telephone Idenification Number is currently suspended. Please contract 2886 6988",
+            "mandarin": "渣打香港: 由于保安理由, 阁下的电话理财密码已被停用. 请致电 2886 6988.",
+            "cantonese": "渣打香港: 由於保安理由, 閣下的電話理財密碼已被停用. 請致電 2886 6988."
+        },{
+            "name": "Report Lost – Credit Card",
+            "english": "SCBHK:Your SCB Credit Card ended $card$ has been blocked. For enquiry please call our hotline 2886 4111.",
+            "mandarin": "渣打香港: 阁下的渣打信用咭 $card$ 已被停用, 如欲查询, 请致电本行热线 2886 4111.",
+            "cantonese": "渣打香港: 閣下的渣打信用咭 $card$ 已被停用, 如欲查詢, 請致電本行熱線 2886 4111."
+        },{
+            "name": "RL-ATM",
+            "english": "SCBHK:Your SCB ATM Card ended $card$ has been blocked. For enquiry please call our hotline 2886 4111.",
+            "mandarin": "渣打香港: 阁下的渣打提款咭 $card$ 已被停用, 如欲查询, 请致电本行热线 2886 8888.",
+            "cantonese": "渣打香港: 閣下的渣打提款咭$card$已被停用, 如欲查詢, 請致電本行熱線 2886 8888."
+        },{
+            "name": "RL_ALL_ATM",
+            "english": "SCBHK:All your SCB ATM Card has been blocked. For enquiry please call our hotline 2886 8888.",
+            "mandarin": "SCBHK:All your SCB ATM Card has been blocked. For enquiry please call our hotline 2886 8888.。",
+            "cantonese": "SCBHK:All your SCB ATM Card has been blocked. For enquiry please call our hotline 2886 8888.。"
+        },{
+            "name": "CC_PAYMENT_CTD_2",
+            "english": "SCBHK:Your instruction to transfer HKD $trnAmt$ from account ended $actNum$ to your Credit Card account ended $cardNum$ has been submitted.",
+            "mandarin": "渣打香港: 阁下已提交有关港元 <HKD> $trnAmt$ 的转账指示 (由户口 <A/C> $actNum$ 到信用咭 <CC> $cardNum$).",
+            "cantonese": "渣打香港: 閣下已遞交有關港元 <HKD> $trnAmt$ 的轉賬指示 (由戶口 <A/C> $actNum$ 到信用咭 <CC> $cardNum$)."
+        },{
+            "name": "CC_NOT_ACTIVATED",
+            "english": "SCBHK:Your Credit Card ended $card$ has been activited.",
+            "mandarin": "渣打香港: 阁下的信用咭  $card$ 已启用.",
+            "cantonese": "渣打香港: 閣下的信用咭 $card$ 已啟用."
+        },{
+            "name": "Autopay_Flexipay_CTD",
+            "english": "SCBHK:Your instruction to transfer HKD $trnAmt$ via AutoPay service to your Credit Card account ended $actNum$ has been submitted.",
+            "mandarin": "渣打香港: 阁下已提交有关港元 <HKD> $trnAmt$ 的转账指示 (由AutoPay服务到信用咭 <CC> $actNum$).",
+            "cantonese": "渣打香港: 閣下已遞交有關港元 <HKD> $trnAmt$ 的轉賬指示 (由AutoPay服務到信用咭 <CC> $actNum$)."
+        },{
+            "name": "CL_INC_CTD_2",
+            "english": "SCBHK:Your new credit line for your Credit Card ended $actNum$ effective from $date1$ to $date2$. For enquiry please call our hotline 2886 4111.",
+            "mandarin": "SCBHK:Your new credit line for your Credit Card ended $actNum$ effective from $date1$ to $date2$. For enquiry please call our hotline 2886 4111",
+            "cantonese": "SCBHK:Your new credit line for your Credit Card ended $actNum$ effective from $date1$ to $date2$. For enquiry please call our hotline 2886 4111"
+        },{
+            "name": "FUND_TRANSFER_WITHIN_SCB_ACCOUNT",
+            "english": "SCBHK:Your instruction to transfer HKD $trnAmt$ from account ended $fromactNum$ to your SCB account ended $toactNum$ has been accepted.",
+            "mandarin": "渣打香港: 阁下有关港元 <HKD> $trnAmt$ 的转账指示已被接纳. (由户口 <A/C> $fromactNum$ 到渣打户口 <A/C> $toactNum$)",
+            "cantonese": "渣打香港: 閣下有關港元 <HKD> $trnAmt$ 的轉賬指示已被接納. (由戶口 <A/C> $fromactNum$ 到渣打戶口 <A/C> $toactNum$)"
+        },{
+            "name": "FUND_PRE_REG_CTD",
+            "english": "SCBHK:Your instruction to transfer HKD $trnAmt$ from account ended $fromactNum$ to PANG S** C***** SCB account ended $toactNum$ has been accepted.",
+            "mandarin": "渣打香港: 阁下有关港元 <HKD> $trnAmt$ 的转账指示已被接纳. (由户口 <A/C> $fromactNum$ 到 PANG S** C***** 的户口, 尾数为 <A/C> $toactNum$)",
+            "cantonese": "渣打香港: 閣下有關港元 <HKD> $trnAmt$ 的轉賬指示已被接納. (由戶口 <A/C> $fromactNum$ 到 PANG S** C***** 的戶口, 尾數為 <A/C> $toactNum$)"
+        },{
+            "name": "UTIBILLPAYDEPOSIT_CTD",
+            "english": "SCBHK:Your instruction to pay HKD $trnAmt$ from account ended $fromactNum$ to $MerchantName$ has been submitted.",
+            "mandarin": "渣打香港: 阁下已提交有关港元 <HKD> $trnAmt$ 的转账指示. (由户口 <A/C> $fromactNum$ 到 $MerchantName$)",
+            "cantonese": "渣打香港: 閣下已遞交有關港元 <HKD> $trnAmt$ 的轉賬指示. (由戶口 <A/C> $fromactNum$ 到 $MerchantName$)"
+        },{
+            "name": "UTIBILLPAYCC_CTD",
+            "english": "SCBHK:Your instruction to pay HKD $trnAmt$ from Credit Card ended $fromactNum$ to $MerchantName$ has been submitted.",
+            "mandarin": "渣打香港: 阁下已提交有关港元 <HKD> $trnAmt$ 的转账指示. (由信用咭 <CC> $fromactNum$ 到 $MerchantName$)",
+            "cantonese": "渣打香港: 閣下已遞交有關港元 <HKD> $trnAmt$ 的轉賬指示. (由信用咭 <CC> $fromactNum$ 到 $MerchantName$)"
+        },{
+            "name": "PROCESS_CHANGED_INSTRUC",
+            "english": "SCBHK:Your instruction to change the maturity instruction for your Time Deposit account ended $fromactNum$ has been accepted. Reference Number $REFNUMBER$.",
+            "mandarin": "渣打香港: 阁下有关更改定期存款到期指示的申请已被接纳 (定期户口尾号为 <TD A/C> $fromactNum$). 参考编号为 $REFNUMBER$.",
+            "cantonese": "渣打香港: 閣下有關更改定期存款到期指示的申請已被接納 (定期戶口尾數為 <TD A/C> $fromactNum$). 參考編號為 $REFNUMBER$."
+        },{
+            "name": "Cheque Book Ordering",
+            "english": "SCBHK:Your instruction cheque book request for your current account ended $fromactNum$ has been submitted.",
+            "mandarin": "渣打香港: 阁下已提交有关申请支票簿的指示. (支票户口 <A/C> $fromactNum$)",
+            "cantonese": "渣打香港: 閣下已遞交有關申請支票簿的指示. (支票戶口 <A/C> $fromactNum$)"
+        },{
+            "name": "VB_AUTH",
+            "english": "SCBHK: You are successful login PhoneBanking by Voice Biomatric at $timedate$.",
+            "mandarin": "渣打香港: 阁下于 $timedate$ 成功利用语音验证账号登入本行电话理财服务.",
+            "cantonese": "渣打香港: 閣下於 $timedate$ 成功利用語音驗證賬號登入本行電話理財服務."
+        },{
+            "name": "VB_AUTH_BLOCK",
+            "english": "SCBHK: Sorry, Your voice id is blocked",
+            "mandarin": "渣打香港: 阁下的语音验证账号已被停用.",
+            "cantonese": "渣打香港: 閣下的語音驗證賬號已被停用."
+        },{
+            "name": "OTP_Auth-RMN",
+            "english": "SCBHK: You are performing enquiry service on SCB PhoneBanking at $timedate$. One-time Password is XXXXXX.",
+            "mandarin": "渣打香港：您正在使用渣打电话理财服务 $timedate$. 一次有效密码为 XXXXXX.",
+            "cantonese": "渣打香港：您正在使用渣打電話理財服務 $timedate$. 一次有效密碼為 XXXXXX."
+        },{
+            "name": "OTP authentication for NRMN",
+            "english": "SCBHK: You are performing enquiry service on SCB PhoneBanking at $timedate$. One-time Password is XXXXXX.",
+            "mandarin": "渣打香港：您正在使用渣打电话理财服务 $timedate$. 一次有效密码为 XXXXXX.",
+            "cantonese": "渣打香港：您正在使用渣打電話理財服務 $timedate$. 一次有效密碼為 XXXXXX."
+        },{
+            "name": "TIN_Change",
+            "english": "SCBHK:Your instruction to change PhoneBanking Telephone Idenification Number has been accepted.",
+            "mandarin": "渣打香港: 阁下有关更改电话理财密码的指示已被接纳.",
+            "cantonese": "渣打香港: 閣下有關更改電話理財密碼的指示已被接納."
+        },{
+            "name": "TIN Change_BLOCK",
+            "english": "SCBHK: Sorry, Your phone banking id is blocked",
+            "mandarin": "渣打香港: 阁下的电话理财账号已被停用.",
+            "cantonese": "渣打香港: 閣下的電話理財賬號已被停用."
+        }
+		,{
+            "name": "VB_Enrollment",
+            "english": "SCBHK:Your instruction to enrol Voice Biometric verification service has been accepted.",
+            "mandarin": "渣打香港: 阁下已成功登记语音验证账号.",
+            "cantonese": "渣打香港: 閣下已成功登記語音驗證賬號."
+        }
+		,{
+            "name": "VB_Unblock",
+            "english": "SCBHK:Your instruction to reactivate Voice Biometric verification service has been accepted",
+            "mandarin": "渣打香港: 阁下有关解锁语音验证账号的指示已被接纳.",
+            "cantonese": "渣打香港: 閣下有關解鎖語音驗證賬號的指示已被接納."
+        },{
+            "name": "VB_DEREG",
+            "english": "SCBHK:Your instruction to deregister Voice Biometric verification service has been accepted",
+            "mandarin": "渣打香港: 阁下有关取消语音验证账号的指示已被接纳.",
+            "cantonese": "渣打香港: 閣下有關取消語音驗證賬號的指示已被接納."
+        },{
+            "name": "JA_TPIN_AUTH",
+            "english": "SCBHK: For security issue, your PhoneBanking Telephone Idenification Number is currently suspended. Please contract 2886 8888.",
+            "mandarin": "渣打香港: 由于保安理由, 阁下的电话理财密码已被停用. 请致电 2886 8888.",
+            "cantonese": "渣打香港: 由於保安理由, 閣下的電話理財密碼已被停用. 請致電 2886 8888."
+        },{
+            "name": "Fund Transfer ConfirmationCheck",
+            "english": "SCBHK:Your instruction to transfer HKD $trnAmt$ from account ended $fromactNum$ to your SCB account ended $toactNum$ has been accepted. Refernce Number $REFNUMBER$.",
+            "mandarin": "渣打香港: 阁下有关港元 <HKD> $trnAmt$ 的转账指示已被接纳. (由户口 <A/C> $fromactNum$ 到渣打户口 <A/C> $toactNum$,  参考编号为 $REFNUMBER$)",
+            "cantonese": "渣打香港: 閣下有關港元 <HKD> $trnAmt$ 的轉賬指示已被接納. (由戶口 <A/C> $fromactNum$ 到渣打戶口 <A/C> $toactNum$,  參考編號為 $REFNUMBER$)"
+        }
+
+    ]
+}

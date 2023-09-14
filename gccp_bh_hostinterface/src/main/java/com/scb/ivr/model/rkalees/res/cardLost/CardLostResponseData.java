@@ -1,30 +1,40 @@
 package com.scb.ivr.model.rkalees.res.cardLost;
 
+import java.util.List;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.scb.ivr.service.generalvo.CommonOutput;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class CardLostResponseData extends CommonOutput{
-
-	private String cardLostInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class CardLostResponseData {
+
+	@JsonProperty("data")
+	private List<Data> data;
+	
+	@JsonProperty("meta")
+	private Meta meta;
+
+	public List<Data> getData() {
+		return data;
+	}
+	public void setData(List<Data> data) {
+		this.data = data;
+	}
+
+	public Meta getMeta() {
+		return meta;
+	}
+	public void setMeta(Meta meta) {
+		this.meta = meta;
+	}
 
 	@Override
 	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    	return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
-	public String getCardLostInfo() {
-		return cardLostInfo;
-	}
-
-	public void setCardLostInfo(String cardLostInfo) {
-		this.cardLostInfo = cardLostInfo;
-	}
-
-	
 }

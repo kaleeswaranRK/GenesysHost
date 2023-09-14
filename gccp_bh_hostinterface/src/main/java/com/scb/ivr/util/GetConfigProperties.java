@@ -82,7 +82,7 @@ public class GetConfigProperties {
 					+ " Config.properties -> Exception occured while processing the config propery:" + serviceName
 					+ ". " + e.getMessage());
 		}
-
+		System.out.println("FLAG PARAMETERS Error code : "+serviceProperties.getProperty("ERROR_CODE"));
 		properties = new Properties();
 		properties.putAll((Properties) configController.getConfigFileValues(GlobalConstants.Operations));
 		
@@ -126,6 +126,7 @@ public class GetConfigProperties {
 
 		properties = new Properties();
 		properties.putAll((Properties) configController.getConfigFileValues(GlobalConstants.Parametric));
+		System.out.println("LOAD ENDPOINT Error code : "+serviceProperties.getProperty("ERROR_CODE"));
 
 		
 		//// LOAD Parametric properties
@@ -149,7 +150,8 @@ public class GetConfigProperties {
 					+ " Exception occured while loading Parametric properties." + e.getMessage());
 			serviceProperties.setProperty("ERROR_CODE", GlobalConstants.FAILURECODE);
 		}
-
+		System.out.println("LOAD Parametric Error code : "+serviceProperties.getProperty("ERROR_CODE"));
+		
 		//// LOAD PAYLOAD PARAMETER
 		try {
 
@@ -171,6 +173,7 @@ public class GetConfigProperties {
 					+ e.getMessage());
 			serviceProperties.setProperty("ERROR_CODE", GlobalConstants.FAILURECODE);
 		}
+		System.out.println("LOAD PAYLOAD PARAMETER Error code : "+serviceProperties.getProperty("ERROR_CODE"));
 
 		return serviceProperties;
 	}

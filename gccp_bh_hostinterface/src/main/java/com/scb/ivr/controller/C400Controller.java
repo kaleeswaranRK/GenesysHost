@@ -338,7 +338,7 @@ public class C400Controller {
 			 ****/
 			
 			Properties serviceProperties = getConfigProperties.getServiceConfig(properties);
-
+			System.out.println("service property : "+serviceProperties);
 			if (serviceProperties.getProperty("ERROR_CODE") != null
 					&& GlobalConstants.FAILURECODE.equals(serviceProperties.getProperty("ERROR_CODE"))) {
 				sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". Error found in service properties ");

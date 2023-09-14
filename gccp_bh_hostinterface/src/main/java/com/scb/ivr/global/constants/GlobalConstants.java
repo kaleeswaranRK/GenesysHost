@@ -50,10 +50,13 @@ public class GlobalConstants {
 	public static String ERRORCODE_DB_EXCEPTION_700032= "700032";
 	
 	public static String ERRORCODE_HOST_TPIN_BLOCKED_700041= "700041";
-	
 	public static String ERRORCODE_HOST_SMS_DEL_FAILED_700051= "700051";
 
-	
+	public static String ERRORCODE_HOST_CARD_BLOCKED_700071= "700071";
+	public static String ERRORCODE_HOST_RELID_OR_CARD_EMPTY_700072= "700072";
+	public static String ERRORCODE_HOST_RELID_NOT_VALID_700073= "700073";
+	public static String ERRORCODE_HOST_CARD_NOT_VALID_700074= "700074";
+
 	/// Dummy Flag
 	public static String Dummy_Flag_Y = "Y";
 	public static String Dummy_Flag_N = "N";

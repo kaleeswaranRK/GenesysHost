@@ -17,12 +17,11 @@ import org.springframework.stereotype.Service;
 import com.scb.ivr.exception.CustomException;
 import com.scb.ivr.global.constants.GlobalConstants;
 import com.scb.ivr.log.custom.CustomLogger;
-import com.scb.ivr.model.ebbs.CustomerIdentificationAcctNum_Req;
-import com.scb.ivr.model.ebbs.CustomerIdentificationAcctNum_Res;
-import com.scb.ivr.service.ebbs.EbbsService;
+import com.scb.ivr.model.rkalees.cardLost_Req;
+import com.scb.ivr.model.rkalees.cardLost_Res;
+import com.scb.ivr.service.rkalees.RkaleesService;
 import com.scb.ivr.util.GetConfigProperties;
 import com.scb.ivr.util.Utilities;
-import com.scb.ivr.util.ValidateInputDetails;
 
 @Component
 @Service
@@ -31,32 +30,30 @@ public class RKALEESController {
 	Utilities utilities;
 
 	@Autowired
-	ValidateInputDetails validateInput;
+	RkaleesService cardlost;
 
 	@Autowired
-	EbbsService service;
-	
+	RkaleesService service;
+
 	@Autowired
 	ConfigController configController;
-	
+
 	@Autowired
 	GetConfigProperties getConfigProperties;
 
 	/// To Identify Customer using Account Number
-	public CustomerIdentificationAcctNum_Res setCardLost(CustomerIdentificationAcctNum_Req req) {
+	public cardLost_Res setCardLost(cardLost_Req req) {
+		SimpleDateFormat dateTimeFormat = new SimpleDateFormat(GlobalConstants.DateTimeFormat);
 
-		CustomerIdentificationAcctNum_Res resObj = new CustomerIdentificationAcctNum_Res();
-
-		
+		cardLost_Res resObj = new cardLost_Res();
 		String hostLoggerName = GlobalConstants.HostLog_RKALEES;
 		String serviceName = "setCardLost";
 		String trackingID = utilities.generateTrackingId();
-
-		org.apache.logging.log4j.Logger tpSystemLogger = org.apache.logging.log4j.LogManager.getContext().getLogger(hostLoggerName);
+		org.apache.logging.log4j.Logger tpSystemLogger = org.apache.logging.log4j.LogManager.getContext()
+				.getLogger(hostLoggerName);
 		Logger sessionLogger = null;
 
-		SimpleDateFormat formatter = new SimpleDateFormat(GlobalConstants.DateTimeFormat);
-		String startDate = formatter.format(new Date());
+		String startDate = dateTimeFormat.format(new Date());
 
 		String sessionId = "";
 
@@ -71,14 +68,14 @@ public class RKALEESController {
 			 * otherwise create the session logger.
 			 * 
 			 ****/
-			
+
 			if (req != null && req.getSessionId() != null && !"".equals(req.getSessionId().trim())) {
 				sessionLogger = CustomLogger.getLogger(req.getSessionId());
-				
+
 				if (sessionLogger == null) {
 					throw new CustomException(GlobalConstants.FAILURECODE, "sessionLogger is NULL");
 				}
-				
+
 				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + ". SessionId: " + req.getSessionId());
 			} else {
 				req.setSessionId(trackingID);
@@ -89,30 +86,33 @@ public class RKALEESController {
 				sessionLogger.debug(utilities.getCurrentClassAndMethodName()
 						+ ". sessionId is NULL, setting trackingId as SessionId: " + trackingID);
 			}
-
+			System.out.println(req.getCardNo());
+			if (req.getCardNo()!=null&&!(req.getCardNo().isEmpty())) {
+				
+			if(req.getCardNo().length()==16) {
+				if (req.getUserId()!=null&& !(req.getUserId().isEmpty())) {
 			sessionId = req.getSessionId();
 			tpSystemLogger.info(utilities.getCurrentClassAndMethodName() + ". Request from IVR: " + req);
 			sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". Request from IVR: " + req);
-
 			/// VALIDATE INPUT PARAMETER
 			/****
 			 * 
 			 * @param acctNumber, mandatory and not null
-			 * @param currency code, mandatory and not null
+			 * @param currency    code, mandatory and not null
 			 * 
-			 * validate input parameter whether acctNumber and currency is null or empty.
-			 * if the input is null @return failure message..
-			 * otherwise flows to be continued.
+			 *                    validate input parameter whether acctNumber and currency
+			 *                    is null or empty. if the input is null @return failure
+			 *                    message.. otherwise flows to be continued.
 			 * 
 			 ****/
-			
-			resObj = validateInput.getCustomerIdentificationAcctNum(req);
 
-			if (resObj.getErrorcode() != null) {
-				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + ". Input validation failed: "
-						+ resObj.getErrorcode() + " - " + resObj.getErrormessage());
-				return resObj;
-			}
+//			resObj = cardlost.cardLost(req);
+//
+//			if (resObj.getErrorcode() != null) {
+//				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + ". Input validation failed: "
+//						+ resObj.getErrorcode() + " - " + resObj.getErrormessage());
+//				return resObj;
+//			}
 
 			/// LOAD PROPERTIES
 			Properties properties = new Properties();
@@ -126,17 +126,20 @@ public class RKALEESController {
 			/// LOAD SERVICE PROPERTIES
 			/****
 			 * 
-			 * Load all mandatory properties.
-			 * Load the properties from file based on service name.
-			 * @return config.properties, operation.properties, EBBSpayload.properties and parametric.properties
+			 * Load all mandatory properties. Load the properties from file based on service
+			 * name.
+			 * 
+			 * @return config.properties, operation.properties, EBBSpayload.properties and
+			 *         parametric.properties
 			 * 
 			 ****/
+			System.out.println("property values");
+			System.out.println("properties : "+properties);
 			Properties serviceProperties = getConfigProperties.getServiceConfig(properties);
-
+			System.out.println("service "+serviceProperties);
 			if (serviceProperties.getProperty("ERROR_CODE") != null
 					&& GlobalConstants.FAILURECODE.equals(serviceProperties.getProperty("ERROR_CODE"))) {
 				sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". Error found in service properties ");
-
 				throw new CustomException(GlobalConstants.ERRORCODE_SERVICE_PROP_NOT_FOUND_700012,
 						"Exception occurs while fetching environment properties");
 			}
@@ -153,7 +156,7 @@ public class RKALEESController {
 			req.setTimeout(serviceProperties.getProperty("timeOut"));
 			req.setRequestTime(startDate);
 			req.setApiName(serviceName);
-			req.setHost(GlobalConstants.TPSystem_Ebbs);
+			req.setHost(GlobalConstants.TPSystem_RKALEES);
 
 			/// ASSIGN ALL PARAMS TO HASHMAP
 			Map<String, Object> inputParams = new HashMap<String, Object>();
@@ -162,10 +165,33 @@ public class RKALEESController {
 
 			sessionLogger.debug(utilities.getCurrentClassAndMethodName() + ". InParams: " + inputParams);
 
-			///CALL SERVICE IMPLEMENTAION
-			resObj = service.getCustomerIdentificationAcctNum(inputParams);
+			/// CALL SERVICE IMPLEMENTAION
+			resObj = service.cardLost(inputParams);
+				}
+				else {
+					resObj.setErrorcode(GlobalConstants.ERRORCODE_HOST_RELID_OR_CARD_EMPTY_700072);
+					resObj.setErrormessage("profile Id number is Empty");
+					sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
+					+ "profile Id number is Empty");
+				}
 
-		} catch (IOException e) {
+		}
+			else {
+				resObj.setErrorcode(GlobalConstants.ERRORCODE_HOST_CARD_NOT_VALID_700074);
+				resObj.setErrormessage("Card number is not valid");
+				sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
+				+ "Card number is not valid");
+			}
+			}
+			else {
+				resObj.setErrorcode(GlobalConstants.ERRORCODE_HOST_RELID_OR_CARD_EMPTY_700072);
+				resObj.setErrormessage("Card number is empty");
+				sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
+				+ "Card number is empty");
+			}
+		}
+
+		catch (IOException e) {
 			resObj.setErrorcode(GlobalConstants.ERRORCODE_IOEXCEPTION_700002);
 			resObj.setErrormessage(GlobalConstants.FAILURE);
 			sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
@@ -184,7 +210,7 @@ public class RKALEESController {
 			resObj.setErrorcode(e.getErrorCode());
 			resObj.setErrormessage(e.getErrorMsg());
 			sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
-			+ " Custom Exception occured.", e);
+					+ " Custom Exception occured.", e);
 		} catch (Exception e) {
 			resObj.setErrorcode(GlobalConstants.FAILURECODE);
 			resObj.setErrormessage(GlobalConstants.FAILURE);
@@ -202,10 +228,14 @@ public class RKALEESController {
 
 				sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". Response to IVR:" + resObj);
 			}
+			tpSystemLogger.info(utilities.getCurrentClassAndMethodName() + " *** Completed *** ");
 
 		}
-
-		tpSystemLogger.info(utilities.getCurrentClassAndMethodName() + " *** Completed *** ");
+		resObj.setStartTime(startDate);
+		resObj.setEndTime(dateTimeFormat.format(new Date()));
+		sessionLogger.debug(
+				utilities.getCurrentClassAndMethodName() + ". Request ended @" + dateTimeFormat.format(new Date()) + " , Time Duration : "
+						+ utilities.getTimeDiffBW2Date(startDate, dateTimeFormat.format(new Date())) + " Seconds");
 		return resObj;
 	}
 }

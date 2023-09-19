@@ -71,7 +71,6 @@ public class C400ServiceImpl implements C400Service {
 	public CustomerIdentificationCardNum_Res getCustomerIdentificationCardNum(Map<String, Object> inputParams) {
 		CustomerIdentificationCardNum_Res resObj = new CustomerIdentificationCardNum_Res();
 		CustomerIdentificationCardNum_Req reqObj = (CustomerIdentificationCardNum_Req) inputParams.get("reqObj");
-
 		Properties serviceProps = (Properties) inputParams.get("serviceProperties");
 		String sessionId = reqObj.getSessionId();
 		Logger sessionLogger = CustomLogger.getLogger(sessionId);
@@ -123,7 +122,6 @@ public class C400ServiceImpl implements C400Service {
 				
 			} else {
 				String xmlString = serviceProps.getProperty("requestPayload");
-
 				Map<String, Object> inputElemets = new HashMap<>();
 				inputElemets.put("cardNum", reqObj.getCardNumber());
 

@@ -419,7 +419,7 @@ public class DBController {
 	public AMIvrIntraction getAMIvrHost(AMIvrIntraction amivr) {
 		AMIvrIntraction amIVRinteraction = new AMIvrIntraction();
 		
-		org.apache.logging.log4j.Logger tpSystemLogger = org.apache.logging.log4j.LogManager.getContext().getLogger(GlobalConstants.HostLog_DB);
+		Logger tpSystemLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 		//Logger tpSystemLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 

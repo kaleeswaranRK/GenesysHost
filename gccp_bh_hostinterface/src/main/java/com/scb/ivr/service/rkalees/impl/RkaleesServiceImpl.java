@@ -3,14 +3,25 @@
  */
 package com.scb.ivr.service.rkalees.impl;
 
+import java.io.IOException;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.http.ParseException;
+import javax.ws.rs.core.Response;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +29,6 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.scb.ivr.api.hosthelper.HostHelper;
@@ -26,7 +36,7 @@ import com.scb.ivr.controller.DBController;
 import com.scb.ivr.exception.CustomException;
 import com.scb.ivr.global.constants.GlobalConstants;
 import com.scb.ivr.log.custom.CustomLogger;
-import com.scb.ivr.model.c400.res.accbal.AccountBalanceResponseData;
+import com.scb.ivr.model.c400.res.custidentifycardnum.CustIdentificationCardNumResponseData;
 import com.scb.ivr.model.rkalees.cardLost_Req;
 import com.scb.ivr.model.rkalees.cardLost_Res;
 import com.scb.ivr.model.rkalees.res.cardLost.CardLostResponseData;
@@ -121,12 +131,191 @@ public class RkaleesServiceImpl implements RkaleesService {
 				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + "Response String value : "+responseString);
 				
 			} else {
-				
+				Response responseMessage=null;
+				System.out.println("entry.....");
 				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + "Original Lost card service Entry");
 				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + "Lost card service processing .......");
-				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + "Original Lost card service Exit");
-				resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
-				resObj.setErrormessage(GlobalConstants.SUCCESS);
+//				String xmlString = serviceProps.getProperty("requestPayload");
+//				Map<String, Object> inputElemets = new HashMap<>();
+//				inputElemets.put("cardNum", reqObj.getCardNo());
+//				inputElemets.put("relID", reqObj.getUserId());
+//				String requestJson = utilities.injectDataIntoRequestString(xmlString, inputElemets);
+//				String url="http://localhost:8080/SCBServicecop/cardLostUpdate";
+//
+//				sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". request JSON is: " + requestJson);
+//				resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
+//				resObj.setErrormessage(GlobalConstants.SUCCESS);
+				String xmlString = serviceProps.getProperty("requestPayload");
+				Map<String, Object> inputElemets = new HashMap<>();
+				inputElemets.put("cardNum", reqObj.getCardNo());
+				inputElemets.put("relID", reqObj.getUserId());
+
+				/***
+				 * Load parameter to payload request
+				 * ***/
+				String requestJson = utilities.injectDataIntoRequestString(xmlString, inputElemets);
+
+				sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". request JSON is: " + requestJson);
+
+				serviceProps.setProperty("requestBody", requestJson);
+				reqObj.setRequestBody(requestJson);
+
+//				//// Token Generation
+//				String token = utilities.callOAuth2Token(serviceProps);
+//
+//				/// Token Validation
+//				if (token == null || "".equals(token.trim())) {
+//					sessionLogger.debug(utilities.getCurrentClassAndMethodName() + ". The token is null/empty");
+//
+//					throw new CustomException(GlobalConstants.ERRORCODE_TOKEN_GEN_700014,
+//							GlobalConstants.FAILURE + ". The token is null/empty");
+//				}
+//				serviceProps.setProperty("token", token);
+//				reqObj.setToken(token);
+//
+//				///Endpoint Http Method 
+//				serviceProps.setProperty("httpMethod", HttpMethod.POST);
+//				inputParams.put("serviceProperties", serviceProps);
+//
+//				/// Header Parameter
+//				/***
+//				 * 
+//				 * form Http Headers Parameter and pass this parameter to helper class. 
+//				 * then the helper class call endpoint api with header parameter and return response
+//				 * 
+//				 * (for helper class reuse purpose)
+//				 * ***/
+//				Map<String, String> httpHeaderParams = new HashMap<>();
+//				httpHeaderParams.put(HttpHeaders.CONTENT_TYPE, "application/vnd.api+json");
+//				httpHeaderParams.put(HttpHeaders.ACCEPT, "application/vnd.api+json");
+//				httpHeaderParams.put("X-Market", serviceProps.getProperty("requestCountry"));
+//				httpHeaderParams.put("Transaction-ID", serviceProps.getProperty("trackingID"));
+//				httpHeaderParams.put("channel", serviceProps.getProperty("channel"));
+//
+//				inputParams.put("httpHeaderParams", httpHeaderParams);
+//
+//				///Call EndPoint API
+//				responseMessage = hostHelper.invokeHttpsWebservice(inputParams);
+				try {
+				HttpPost httpPost = new HttpPost(serviceProps.getProperty("endPoint"));
+				httpPost.setHeader("Content-type", "application/json");
+				StringEntity stringEntity = new StringEntity(reqObj.getRequestBody(), "UTF-8");
+				stringEntity.setChunked(true);
+				httpPost.setEntity(stringEntity);
+				CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+				CloseableHttpResponse response = httpClient.execute(httpPost);
+				System.out.println("host return ...");
+				System.out.println("Response : "+response);
+				String strResponse="";
+				
+				if (response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 201) {
+
+					HttpEntity entity = response.getEntity();
+					if (entity != null) {
+						strResponse = EntityUtils.toString(entity);
+						responseMessage = Response.status(response.getStatusLine().getStatusCode()).entity(strResponse)
+								.build();
+					} else {
+						sessionLogger.debug(utilities.getCurrentClassAndMethodName()
+								+ " Error While Accessing HTTP Service : " + response.getStatusLine().getStatusCode());
+					}
+				} else {
+					String msg = "";
+					if (response != null && response.getEntity() != null) {
+						msg = EntityUtils.toString(response.getEntity());
+						responseMessage = Response.status(response.getStatusLine().getStatusCode()).entity(msg).build();
+					}
+				}
+				if (responseMessage != null && responseMessage.getEntity() != null
+						&& !responseMessage.getEntity().toString().equalsIgnoreCase("")) {
+
+					sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". Response : "
+							+ responseMessage.getEntity().toString());
+
+					ObjectMapper objectMapper = new ObjectMapper();
+					objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+
+					/***
+					 * check status code from endPoint API response.
+					 * 
+					 * if the status code is 200 or 201, received success response. mapping the success code and return to IVR.
+					 * otherwise error message received from endPoint. mapping that error message data and return to IVR.
+					 * 
+					 * ****/
+					
+					if (responseMessage.getStatus() == 200 || responseMessage.getStatus() == 201) {
+						CardLostResponseData dataObjects = objectMapper.readValue(
+								responseMessage.getEntity().toString(), CardLostResponseData.class);
+						if (dataObjects != null) {
+							resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
+							resObj.setErrormessage(GlobalConstants.SUCCESS);
+							resObj.setResponse(dataObjects);
+						} else {
+							resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
+							resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
+						}
+					} else {
+						CustIdentificationCardNumResponseData dataObjects = objectMapper.readValue(
+								responseMessage.getEntity().toString(), CustIdentificationCardNumResponseData.class);
+
+						if (dataObjects.getMessage() != null) {
+							resObj.setErrorcode(String.valueOf(responseMessage.getStatus()));
+							resObj.setErrormessage(GlobalConstants.FAILURE + ". " + dataObjects.getMessage());
+						} else if (dataObjects.getErrors() != null && dataObjects.getErrors().length > 0) {
+							if(dataObjects.getErrors()[0].getCode() != null) {
+								resObj.setErrorcode(dataObjects.getErrors()[0].getCode());
+								resObj.setErrormessage(GlobalConstants.FAILURE + ". " + dataObjects.getErrors()[0].getDetail());
+							} else if(dataObjects.getErrors()[0].getStatus() != null) {
+								resObj.setErrorcode(dataObjects.getErrors()[0].getStatus());
+								resObj.setErrormessage(GlobalConstants.FAILURE + ". " + dataObjects.getErrors()[0].getTitle());
+							} else {
+								resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
+								resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
+							}
+						} else {
+							resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
+							resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
+						}
+
+					}
+				} else {
+					sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". Empty Response");
+					throw new CustomException(GlobalConstants.ERRORCODE_RESPONSE_IS_EMPTY_700015,
+							"Response is Null, Setting Failure code");
+				}
+
+				}
+				catch (SocketException e) {
+					sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
+							+ ". Socket Exception MSG IS " + e.getMessage(), e);
+
+					throw new SocketException(e.getMessage());
+				} catch (SocketTimeoutException e) {
+					sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
+							+ ". Socket TimeOut Exception MSG IS " + e.getMessage(), e);
+
+					throw new SocketTimeoutException(e.getMessage());
+				} catch (ConnectTimeoutException e) {
+					sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
+							+ ". Connect TimeOut Exception MSG IS " + e.getMessage(), e);
+
+					throw new ConnectTimeoutException(e.getMessage());
+				} catch (IOException e) {
+					sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
+							+ ". IO Exception MSG IS " + e.getMessage(), e);
+
+					throw new IOException(e.getMessage());
+				} catch (IllegalArgumentException e) {
+					sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
+							+ ". Illegal Argument Exception MSG IS " + e.getMessage(), e);
+
+					throw new IllegalArgumentException(e.getMessage());
+				} catch (Exception e) {
+					sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
+							+ ". Exception MSG IS " + e.getMessage(), e);
+				}
+				System.out.println("Exit...");
+				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + "Original Lost card service Exit......");
 			}
 
 

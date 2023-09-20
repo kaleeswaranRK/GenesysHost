@@ -238,4 +238,6 @@ public class RKALEESController {
 						+ utilities.getTimeDiffBW2Date(startDate, dateTimeFormat.format(new Date())) + " Seconds");
 		return resObj;
 	}
+	
+	
 }

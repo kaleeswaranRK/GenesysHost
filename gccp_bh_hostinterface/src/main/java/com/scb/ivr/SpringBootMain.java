@@ -54,7 +54,6 @@ import com.scb.ivr.model.c400.CustomerIdentificationCardNum_Req;
 import com.scb.ivr.model.c400.CustomerIdentificationCardNum_Res;
 import com.scb.ivr.model.c400.CustomerProfile_Req;
 import com.scb.ivr.model.c400.CustomerProfile_Res;
-import com.scb.ivr.model.c400.res.accbal.AccountBalanceDatum;
 import com.scb.ivr.model.casas.ChangeTPIN_Req;
 import com.scb.ivr.model.casas.ChangeTPIN_Res;
 import com.scb.ivr.model.casas.GenerateTPIN_Req;
@@ -226,10 +225,9 @@ public class SpringBootMain {
 	private void setCardLost(ApplicationContext context) throws Exception {
 		RKALEESController controller = (RKALEESController) context.getBean("RKALEESController");
 		String ucid = "0000" + new SimpleDateFormat("ddMMyyyyhhmmssss").format(new Date());
-
 		cardLost_Req reqObj = new cardLost_Req();
 		cardLost_Res res = new cardLost_Res();
-		reqObj.setCardNo("5371780000198991");
+		reqObj.setCardNo("5371780000198990");
 		reqObj.setSessionId(ucid);
 		reqObj.setUcid(ucid);
 		reqObj.setHotline("89899899001");

@@ -125,7 +125,7 @@ public class DBController {
 
 		CallLogUpdate_Res callLogUpdate_Res = new CallLogUpdate_Res();
 		
-		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()));
+		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 		String status = GlobalConstants.FAILURE;
 

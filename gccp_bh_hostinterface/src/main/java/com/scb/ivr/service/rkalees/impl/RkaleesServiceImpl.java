@@ -68,7 +68,7 @@ public class RkaleesServiceImpl implements RkaleesService {
 
 	@Override
 	public cardLost_Res cardLost(Map<String, Object> inputParams) {
-		System.out.println("cardLost Entry obj __________________"+inputParams);
+		System.out.println("cardLost Entry obj __________________" + inputParams);
 
 		cardLost_Res resObj = new cardLost_Res();
 		cardLost_Req reqObj = (cardLost_Req) inputParams.get("reqObj");
@@ -100,27 +100,26 @@ public class RkaleesServiceImpl implements RkaleesService {
 					responseString = new String(Files.readAllBytes(Paths.get(filePath)));
 					ObjectMapper objectMapper = new ObjectMapper();
 					objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-					CardLostResponseData data = objectMapper.readValue(responseString,
-							CardLostResponseData.class);
-					JsonObject cardDetails =JsonParser.parseString(responseString).getAsJsonObject().getAsJsonObject("data");
+					CardLostResponseData data = objectMapper.readValue(responseString, CardLostResponseData.class);
+					JsonObject cardDetails = JsonParser.parseString(responseString).getAsJsonObject()
+							.getAsJsonObject("data");
 					String customerId = cardDetails.getAsJsonObject("attributes").get("customer-id").getAsString();
-					sessionLogger.debug(utilities.getCurrentClassAndMethodName() + "customerId from response : " + customerId);
-					cardLost_Req req = (cardLost_Req)inputParams.get("reqObj");
-					if(req.getUserId().equalsIgnoreCase(customerId)) {
-					String cardStatus = cardDetails.getAsJsonObject("attributes").get("card-status").getAsString();
-					sessionLogger.debug(utilities.getCurrentClassAndMethodName() + "Card Status : " + cardStatus);
-					if ("BLOCKED".equalsIgnoreCase(cardStatus)) {
-						resObj.setErrorcode(GlobalConstants.ERRORCODE_HOST_CARD_BLOCKED_700071);
-						resObj.setErrormessage("Card is Already blocked");
-						resObj.setResponse(data);
-					}
-					else {
-						resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
-						resObj.setErrormessage(GlobalConstants.SUCCESS);
-						resObj.setResponse(data);
-					}
-					}
-					else {
+					sessionLogger.debug(
+							utilities.getCurrentClassAndMethodName() + "customerId from response : " + customerId);
+					cardLost_Req req = (cardLost_Req) inputParams.get("reqObj");
+					if (req.getUserId().equalsIgnoreCase(customerId)) {
+						String cardStatus = cardDetails.getAsJsonObject("attributes").get("card-status").getAsString();
+						sessionLogger.debug(utilities.getCurrentClassAndMethodName() + "Card Status : " + cardStatus);
+						if ("BLOCKED".equalsIgnoreCase(cardStatus)) {
+							resObj.setErrorcode(GlobalConstants.ERRORCODE_HOST_CARD_BLOCKED_700071);
+							resObj.setErrormessage("Card is Already blocked");
+							resObj.setResponse(data);
+						} else {
+							resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
+							resObj.setErrormessage(GlobalConstants.SUCCESS);
+							resObj.setResponse(data);
+						}
+					} else {
 						resObj.setErrorcode(GlobalConstants.ERRORCODE_HOST_RELID_NOT_VALID_700073);
 						resObj.setErrormessage("relID is Invalid");
 					}
@@ -128,10 +127,11 @@ public class RkaleesServiceImpl implements RkaleesService {
 					throw new CustomException(GlobalConstants.ERRORCODE_DUMMY_FILE_RESPONSE_NOT_FOUND_700013,
 							"The required File not Found " + e.getMessage());
 				}
-				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + "Response String value : "+responseString);
-				
+				sessionLogger
+						.debug(utilities.getCurrentClassAndMethodName() + "Response String value : " + responseString);
+
 			} else {
-				Response responseMessage=null;
+				Response responseMessage = null;
 				System.out.println("entry.....");
 				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + "Original Lost card service Entry");
 				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + "Lost card service processing .......");
@@ -152,7 +152,7 @@ public class RkaleesServiceImpl implements RkaleesService {
 
 				/***
 				 * Load parameter to payload request
-				 * ***/
+				 ***/
 				String requestJson = utilities.injectDataIntoRequestString(xmlString, inputElemets);
 
 				sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". request JSON is: " + requestJson);
@@ -197,81 +197,89 @@ public class RkaleesServiceImpl implements RkaleesService {
 //				///Call EndPoint API
 //				responseMessage = hostHelper.invokeHttpsWebservice(inputParams);
 				try {
-				HttpPost httpPost = new HttpPost(serviceProps.getProperty("endPoint"));
-				httpPost.setHeader("Content-type", "application/json");
-				StringEntity stringEntity = new StringEntity(reqObj.getRequestBody(), "UTF-8");
-				stringEntity.setChunked(true);
-				httpPost.setEntity(stringEntity);
-				CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-				CloseableHttpResponse response = httpClient.execute(httpPost);
-				System.out.println("host return ...");
-				System.out.println("Response : "+response);
-				String strResponse="";
-				
-				if (response != null && response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 201) {
+					HttpPost httpPost = new HttpPost(serviceProps.getProperty("endPoint"));
+					httpPost.setHeader("Content-type", "application/json");
+					StringEntity stringEntity = new StringEntity(reqObj.getRequestBody(), "UTF-8");
+					stringEntity.setChunked(true);
+					httpPost.setEntity(stringEntity);
+					CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+					CloseableHttpResponse response = httpClient.execute(httpPost);
+					System.out.println("host return ...");
+					System.out.println("Response : " + response);
+					String strResponse = "";
 
-					HttpEntity entity = response.getEntity();
-					if (entity != null) {
-						strResponse = EntityUtils.toString(entity);
-						responseMessage = Response.status(response.getStatusLine().getStatusCode()).entity(strResponse)
-								.build();
-						resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
-						resObj.setErrormessage(GlobalConstants.SUCCESS);
+					if (response != null) {
+						if (response.getStatusLine().getStatusCode() == 200
+								|| response.getStatusLine().getStatusCode() == 201) {
+							HttpEntity entity = response.getEntity();
+							if (entity != null) {
+								strResponse = EntityUtils.toString(entity);
+								responseMessage = Response.status(response.getStatusLine().getStatusCode())
+										.entity(strResponse).build();
+								resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
+								resObj.setErrormessage(GlobalConstants.SUCCESS);
+							} else {
+								resObj.setErrorcode(GlobalConstants.ERRORCODE_NULLPOINTEREXCEPTION_700004);
+								resObj.setErrormessage(GlobalConstants.SUCCESS);
+								sessionLogger.debug(utilities.getCurrentClassAndMethodName()
+										+ " Error While Accessing HTTP Service : "
+										+ response.getStatusLine().getStatusCode());
+							}
+						} else if(response.getStatusLine().getStatusCode()==204) {
+							resObj.setErrorcode(String.valueOf(response.getStatusLine().getStatusCode()));
+							resObj.setErrormessage(GlobalConstants.ERRORCODE_HOST_CARD_NOT_VALID_700074);
+						}
+						else {
+							resObj.setErrorcode(GlobalConstants.FAILURECODE);
+							resObj.setErrormessage(GlobalConstants.FAILURE);
+						}
 					} else {
-						resObj.setErrorcode(GlobalConstants.ERRORCODE_NULLPOINTEREXCEPTION_700004);
-						resObj.setErrormessage(GlobalConstants.SUCCESS);
+						resObj.setErrorcode(GlobalConstants.FAILURECODE);
+						resObj.setErrormessage(GlobalConstants.FAILURE);
 						sessionLogger.debug(utilities.getCurrentClassAndMethodName()
 								+ " Error While Accessing HTTP Service : " + response.getStatusLine().getStatusCode());
 					}
-				} else {
-					resObj.setErrorcode(GlobalConstants.FAILURECODE);
-					if (response != null) {
-						resObj.setErrorcode(String.valueOf(response.getStatusLine().getStatusCode()));
-					}
-					resObj.setErrormessage(GlobalConstants.FAILURE);
-					sessionLogger.debug(utilities.getCurrentClassAndMethodName()
-							+ " Error While Accessing HTTP Service : " + response.getStatusLine().getStatusCode());
-				}
-				if (responseMessage != null && responseMessage.getEntity() != null
-						&& !responseMessage.getEntity().toString().equalsIgnoreCase("")) {
+					if (responseMessage != null && responseMessage.getEntity() != null
+							&& !responseMessage.getEntity().toString().equalsIgnoreCase("")) {
 
-					sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". Response : "
-							+ responseMessage.getEntity().toString());
+						sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". Response : "
+								+ responseMessage.getEntity().toString());
 
-					ObjectMapper objectMapper = new ObjectMapper();
-					objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+						ObjectMapper objectMapper = new ObjectMapper();
+						objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
 
-					/***
-					 * check status code from endPoint API response.
-					 * 
-					 * if the status code is 200 or 201, received success response. mapping the success code and return to IVR.
-					 * otherwise error message received from endPoint. mapping that error message data and return to IVR.
-					 * 
-					 * ****/
-					
-					if (responseMessage.getStatus() == 200 || responseMessage.getStatus() == 201) {
-						CardLostResponseData dataObjects = objectMapper.readValue(
-								responseMessage.getEntity().toString(), CardLostResponseData.class);
-						if (dataObjects != null) {
-							resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
-							resObj.setErrormessage(GlobalConstants.SUCCESS);
-							resObj.setResponse(dataObjects);
+						/***
+						 * check status code from endPoint API response.
+						 * 
+						 * if the status code is 200 or 201, received success response. mapping the
+						 * success code and return to IVR. otherwise error message received from
+						 * endPoint. mapping that error message data and return to IVR.
+						 * 
+						 ****/
+
+						if (responseMessage.getStatus() == 200 || responseMessage.getStatus() == 201) {
+							CardLostResponseData dataObjects = objectMapper
+									.readValue(responseMessage.getEntity().toString(), CardLostResponseData.class);
+							if (dataObjects != null) {
+								resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
+								resObj.setErrormessage(GlobalConstants.SUCCESS);
+								resObj.setResponse(dataObjects);
+							} else {
+								resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
+								resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
+							}
 						} else {
 							resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
 							resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
 						}
-					} else {
-							resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
-							resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
-						}
 
-				} else {
-					sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". Empty Response");
-					resObj.setErrorcode(GlobalConstants.ERRORCODE_RESPONSE_IS_EMPTY_700015);
-					resObj.setErrormessage(GlobalConstants.FAILURE + ". " + "Response is Null, Setting Failure code");
-				}
-				}
-				catch (SocketException e) {
+					} else {
+						sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". Empty Response");
+						resObj.setErrorcode(GlobalConstants.ERRORCODE_RESPONSE_IS_EMPTY_700015);
+						resObj.setErrormessage(
+								GlobalConstants.FAILURE + ". " + "Response is Null, Setting Failure code");
+					}
+				} catch (SocketException e) {
 					sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
 							+ ". Socket Exception MSG IS " + e.getMessage(), e);
 
@@ -304,13 +312,12 @@ public class RkaleesServiceImpl implements RkaleesService {
 				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + "Original Lost card service Exit......");
 			}
 
-
 		} catch (NullPointerException e) {
 			resObj.setErrorcode(GlobalConstants.ERRORCODE_NULLPOINTEREXCEPTION_700004);
 			resObj.setErrormessage(GlobalConstants.FAILURE + ". Exception is : Null Exception occured");
 			sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
 					+ " Null Exception occured.", e);
-		}catch (CustomException e) {
+		} catch (CustomException e) {
 			resObj.setErrorcode(e.getErrorCode());
 			resObj.setErrormessage(e.getErrorMsg());
 		} catch (Exception e) {
@@ -329,7 +336,7 @@ public class RkaleesServiceImpl implements RkaleesService {
 
 				inputParams.put("I_STATUS_CODE", resObj.getErrorcode());
 				inputParams.put("I_STATUS_DESCRIPTION", resObj.getErrormessage());
-				System.out.println("cardLost Exit obj __________________"+inputParams);
+				System.out.println("cardLost Exit obj __________________" + inputParams);
 
 				dbController.insertHostTransactions(inputParams);
 				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + " DB Host insertion completed ");
@@ -340,7 +347,6 @@ public class RkaleesServiceImpl implements RkaleesService {
 			}
 			inputParams = null;
 		}
-
 
 		/**
 		 * Load default status code and return to IVR.
@@ -354,6 +360,5 @@ public class RkaleesServiceImpl implements RkaleesService {
 		return resObj;
 
 	}
-
 
 }

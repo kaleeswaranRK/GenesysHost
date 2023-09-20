@@ -208,23 +208,29 @@ public class RkaleesServiceImpl implements RkaleesService {
 				System.out.println("Response : "+response);
 				String strResponse="";
 				
-				if (response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 201) {
+				if (response != null && response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 201) {
 
 					HttpEntity entity = response.getEntity();
 					if (entity != null) {
 						strResponse = EntityUtils.toString(entity);
 						responseMessage = Response.status(response.getStatusLine().getStatusCode()).entity(strResponse)
 								.build();
+						resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
+						resObj.setErrormessage(GlobalConstants.SUCCESS);
 					} else {
+						resObj.setErrorcode(GlobalConstants.ERRORCODE_NULLPOINTEREXCEPTION_700004);
+						resObj.setErrormessage(GlobalConstants.SUCCESS);
 						sessionLogger.debug(utilities.getCurrentClassAndMethodName()
 								+ " Error While Accessing HTTP Service : " + response.getStatusLine().getStatusCode());
 					}
 				} else {
-					String msg = "";
-					if (response != null && response.getEntity() != null) {
-						msg = EntityUtils.toString(response.getEntity());
-						responseMessage = Response.status(response.getStatusLine().getStatusCode()).entity(msg).build();
+					resObj.setErrorcode(GlobalConstants.FAILURECODE);
+					if (response != null) {
+						resObj.setErrorcode(String.valueOf(response.getStatusLine().getStatusCode()));
 					}
+					resObj.setErrormessage(GlobalConstants.FAILURE);
+					sessionLogger.debug(utilities.getCurrentClassAndMethodName()
+							+ " Error While Accessing HTTP Service : " + response.getStatusLine().getStatusCode());
 				}
 				if (responseMessage != null && responseMessage.getEntity() != null
 						&& !responseMessage.getEntity().toString().equalsIgnoreCase("")) {
@@ -255,35 +261,15 @@ public class RkaleesServiceImpl implements RkaleesService {
 							resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
 						}
 					} else {
-						CustIdentificationCardNumResponseData dataObjects = objectMapper.readValue(
-								responseMessage.getEntity().toString(), CustIdentificationCardNumResponseData.class);
-
-						if (dataObjects.getMessage() != null) {
-							resObj.setErrorcode(String.valueOf(responseMessage.getStatus()));
-							resObj.setErrormessage(GlobalConstants.FAILURE + ". " + dataObjects.getMessage());
-						} else if (dataObjects.getErrors() != null && dataObjects.getErrors().length > 0) {
-							if(dataObjects.getErrors()[0].getCode() != null) {
-								resObj.setErrorcode(dataObjects.getErrors()[0].getCode());
-								resObj.setErrormessage(GlobalConstants.FAILURE + ". " + dataObjects.getErrors()[0].getDetail());
-							} else if(dataObjects.getErrors()[0].getStatus() != null) {
-								resObj.setErrorcode(dataObjects.getErrors()[0].getStatus());
-								resObj.setErrormessage(GlobalConstants.FAILURE + ". " + dataObjects.getErrors()[0].getTitle());
-							} else {
-								resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
-								resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
-							}
-						} else {
 							resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
 							resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
 						}
 
-					}
 				} else {
 					sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". Empty Response");
-					throw new CustomException(GlobalConstants.ERRORCODE_RESPONSE_IS_EMPTY_700015,
-							"Response is Null, Setting Failure code");
+					resObj.setErrorcode(GlobalConstants.ERRORCODE_RESPONSE_IS_EMPTY_700015);
+					resObj.setErrormessage(GlobalConstants.FAILURE + ". " + "Response is Null, Setting Failure code");
 				}
-
 				}
 				catch (SocketException e) {
 					sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
@@ -342,7 +328,7 @@ public class RkaleesServiceImpl implements RkaleesService {
 				 ***/
 
 				inputParams.put("I_STATUS_CODE", resObj.getErrorcode());
-				inputParams.put("I_STATUS_DESCRIPTION", resObj.getErrorcode());
+				inputParams.put("I_STATUS_DESCRIPTION", resObj.getErrormessage());
 				System.out.println("cardLost Exit obj __________________"+inputParams);
 
 				dbController.insertHostTransactions(inputParams);

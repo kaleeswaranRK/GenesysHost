@@ -56,9 +56,7 @@ public class DBController {
 	public PrefereredLangCode_Res getPreferredLanguageBasedOnCLI(Map<String, Object> inParams) {
 		PrefereredLangCode_Res prefereredLangCode_Res = new PrefereredLangCode_Res();
 		
-		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
-				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger =  CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 		String cli = (String) inParams.get("cli");
 
@@ -87,9 +85,7 @@ public class DBController {
 	public PrefereredLangUpdate_Res setPreferredLanguage(Map<String, Object> inParams) {
 
 		PrefereredLangUpdate_Res prefereredLangUpdate_Res = new PrefereredLangUpdate_Res();
-		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
-				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger =  CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 		String relId = (String) inParams.get("relId");
 		String langCode = (String) inParams.get("langCode");
@@ -129,9 +125,7 @@ public class DBController {
 
 		CallLogUpdate_Res callLogUpdate_Res = new CallLogUpdate_Res();
 		
-		Logger sessionLogger = call_log != null && call_log.getSession_id() != null
-				? CustomLogger.getLogger(call_log.getSession_id().toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()));
+		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()));
 
 		String status = GlobalConstants.FAILURE;
 
@@ -160,9 +154,7 @@ public class DBController {
 	public void insertHostTransactions(Map<String, Object> input) {
 		CommonInput commonInput = (CommonInput) input.get("reqObj");
 
-		Logger sessionLogger = input != null && commonInput.getSessionId() != null
-				? CustomLogger.getLogger(commonInput.getSessionId().toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 		//sessionLogger.debug(utilities.getCurrentClassAndMethodName() + " Started input Params : " + input);
 		try {
@@ -174,9 +166,7 @@ public class DBController {
 
 	public BinMaster_Res getCardDetailsBasedOnBin(Map<String, Object> inParams) {
 
-		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
-				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger =  CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 		String binNumber = (String) inParams.get("binNumber");
 
@@ -212,9 +202,7 @@ public class DBController {
 	}
 
 	public AllBinDetails_Res getAllBinDetails(Map<String, Object> inParams) {
-		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
-				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger =  CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 		AllBinDetails_Res allBinDetails_Res = new AllBinDetails_Res();
 		
@@ -321,9 +309,7 @@ public class DBController {
 		
 		String tableName = inParams.get("tableName").toString();
 		
-		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
-				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger =  CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 		GetConfigDetails_Res configDetailsRes = new GetConfigDetails_Res();
 
@@ -403,7 +389,7 @@ public class DBController {
 
 	
 	public void insertAMIvrHost(AMIvrIntraction amivr, String method) {
-		Logger tpSystemLogger = org.apache.logging.log4j.LogManager.getContext().getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger tpSystemLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 		try {
 			tpSystemLogger.debug(utilities.getCurrentClassAndMethodName() + " Started , InsertAMIvr Status");
@@ -453,9 +439,7 @@ public class DBController {
 	
 	public IncomingPoints_Res getIncomingPoints(Map<String, Object> inParams) {
 		IncomingPoints_Res incomingPoints_Res = new IncomingPoints_Res();
-		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
-				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger =  CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 		try {
 			sessionLogger.debug(utilities.getCurrentClassAndMethodName() + " Started , get IncomingPoints");
@@ -472,9 +456,7 @@ public class DBController {
 	public TransferPoints_Res getTransferPoints(Map<String, Object> inParams) {
 
 		TransferPoints_Res transferPoints_Res = new TransferPoints_Res();
-		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
-				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger =  CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 		try {
 			sessionLogger.debug(utilities.getCurrentClassAndMethodName() + " Started , get TransferPoints");
@@ -494,9 +476,7 @@ public class DBController {
 
 		BusinessHrsCheck_Res res = new BusinessHrsCheck_Res();
 		
-		Logger sessionLogger = reqObj != null && reqObj.getSessionId() != null
-				? CustomLogger.getLogger(reqObj.getSessionId().toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger =  CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 
 		sessionLogger.debug(utilities.getCurrentClassAndMethodName() + " Started Input Params : " + reqObj);
@@ -518,9 +498,7 @@ public class DBController {
 
 		ContextCTI_Res contextCTI_Res = new ContextCTI_Res();
 		
-		Logger sessionLogger = contextCTI_Req != null && contextCTI_Req.getSession_id() != null
-				? CustomLogger.getLogger(contextCTI_Req.getSession_id().toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger =  CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 		String status = GlobalConstants.FAILURE;
 
@@ -557,9 +535,7 @@ public class DBController {
 
 		Map<String, String> contextStoreDtlsRes = new HashMap<>();
 		
-		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
-				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger =  CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
 
 		try {
 			sessionLogger.debug(utilities.getCurrentClassAndMethodName() + " Started , get TransferPoints");

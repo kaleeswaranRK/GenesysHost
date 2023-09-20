@@ -120,7 +120,7 @@ public class SpringBootMain {
 //		System.setProperty("log4jpath", "C:\\Users\\1636022\\Documents\\Ganesh\\BH\\Logs\\");
 
 		/**** RKALEES ****/
-		sb1.setCardLost(context);
+//		sb1.setCardLost(context);
 
 		/**** cards400 ****/
 		// sb1.getCustomerIdentificationCardNum(context);

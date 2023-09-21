@@ -2,9 +2,6 @@ package com.scb.ivr.model.rkalees.res.cardLost;
 
 import java.util.List;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,6 +14,9 @@ public class CardLostResponseData {
 	
 	@JsonProperty("meta")
 	private Meta meta;
+	
+	@JsonProperty("links")
+	private List<Links> links;
 
 	public List<Data> getData() {
 		return data;
@@ -32,9 +32,16 @@ public class CardLostResponseData {
 		this.meta = meta;
 	}
 
+	public List<Links> getLinks() {
+		return links;
+	}
+	public void setLinks(List<Links> links) {
+		this.links = links;
+	}
 	@Override
 	public String toString() {
-    	return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+		return "CardLostResponseData [data=" + data + ", meta=" + meta + ", links=" + links + "]";
 	}
+	
 
 }

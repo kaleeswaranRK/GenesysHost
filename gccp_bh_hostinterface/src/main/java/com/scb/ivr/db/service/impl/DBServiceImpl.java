@@ -1,7 +1,6 @@
 package com.scb.ivr.db.service.impl;
 
 import java.net.InetAddress;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,15 +13,10 @@ import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
 
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
-
-
-import org.hibernate.exception.JDBCConnectionException;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.scb.ivr.db.entity.AMIvrIntraction;
 import com.scb.ivr.db.entity.AllBinDetails_Res;
 //import com.scb.avaya.logging.CustomLogger;
@@ -47,7 +41,6 @@ import com.scb.ivr.global.constants.GlobalConstants;
 import com.scb.ivr.log.custom.CustomLogger;
 import com.scb.ivr.service.generalvo.CommonInput;
 import com.scb.ivr.util.Utilities;
-import org.apache.logging.log4j.Logger;
 
 @Component
 public class DBServiceImpl implements DBService {
@@ -68,7 +61,7 @@ public class DBServiceImpl implements DBService {
 
 		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
 				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+				: CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
 		String langCode = "";
 
@@ -114,7 +107,7 @@ public class DBServiceImpl implements DBService {
 	public String setPreferredLanguage(Map<String, Object> inParams) throws Exception {
 
 		String status = GlobalConstants.FAILURE;
-		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null? CustomLogger.getLogger(inParams.get("sessionId").toString()): CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null? CustomLogger.getLogger(inParams.get("sessionId").toString()): CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
 		String cli = (String) inParams.get("cli");
 		String relId = (String) inParams.get("relId");
@@ -152,7 +145,7 @@ public class DBServiceImpl implements DBService {
 
 		Logger sessionLogger = callLog_Req != null && callLog_Req.getSession_id() != null
 				? CustomLogger.getLogger(callLog_Req.getSession_id().toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+				: CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
 		String status = "";
 		sessionLogger.debug(utilities.getCurrentClassAndMethodName() + " UCID : " + callLog_Req.getUcid());
@@ -211,7 +204,7 @@ public class DBServiceImpl implements DBService {
 
 		Logger sessionLogger = input != null && commonInput.getSessionId() != null
 				? CustomLogger.getLogger(commonInput.getSessionId().toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+				: CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
 		String ucid= utilities.isNullOrEmpty(commonInput.getUcid()) ? "NA" : commonInput.getUcid();
 		
@@ -262,7 +255,7 @@ public class DBServiceImpl implements DBService {
 
 		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
 				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+				: CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
 		String binNumber = (String) inParams.get("binNumber");
 
@@ -328,7 +321,7 @@ public class DBServiceImpl implements DBService {
 
 		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
 				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+				: CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
 		AllBinDetails_Res allBinDetails_Res=new AllBinDetails_Res();
 		List<BinMaster_Res> binMasterList = new ArrayList<>();
@@ -396,7 +389,7 @@ public class DBServiceImpl implements DBService {
 	@Transactional(value = "transactionManager")
 	@Override
 	public boolean isOfflineHrs() {
-		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 		boolean is_offline_hrs = false;
 		try {
 
@@ -424,7 +417,7 @@ public class DBServiceImpl implements DBService {
 	@Override
 	public String languageReset(Map<String, Object> requestParams) throws Exception {
 		String resetStatus = "";
-		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 		try {
 			
 			String cli = requestParams.get("cli") != null ? requestParams.get("cli").toString() : "";
@@ -463,7 +456,7 @@ public class DBServiceImpl implements DBService {
 	@Override
 	public PublicHolidayCheck_Res getPublicHolidayDetails(String dateStr) throws Exception {
 
-		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 		PublicHolidayCheck_Res res = new PublicHolidayCheck_Res();
 		res.setDateStr(dateStr);
 		try {
@@ -509,7 +502,7 @@ public class DBServiceImpl implements DBService {
 	@Override
 	public GetConfigDetails_Res getCommonConfigDetails(String tableName) throws Exception {
 
-		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 		GetConfigDetails_Res res = new GetConfigDetails_Res();
 
 		List<CommonConfigDetails> commonConfigDtlsList = new ArrayList<CommonConfigDetails>();
@@ -575,7 +568,7 @@ public class DBServiceImpl implements DBService {
 	@Override
 	public PublicHolidayCheck_Res holidayCheck(Map<String, Object> inParams) throws Exception {
 
-		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
 		PublicHolidayCheck_Res res = new PublicHolidayCheck_Res();
 
@@ -623,7 +616,7 @@ public class DBServiceImpl implements DBService {
 	@Transactional(value = "transactionManager")
 	@Override
 	public ServiceHours_Res getServiceHours(ServiceHours_Req req) throws Exception {
-		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
 		ServiceHours_Res response = new ServiceHours_Res();
 		try {
@@ -699,7 +692,7 @@ public class DBServiceImpl implements DBService {
 	@Override
 	public void insertAMIvrDetails(AMIvrIntraction amivr, String method) {
 
-		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
 		try {
 
@@ -727,9 +720,9 @@ public class DBServiceImpl implements DBService {
 	@Override
 	public AMIvrIntraction getAMIvrDetails(AMIvrIntraction amivr) {
 		
-		org.apache.logging.log4j.Logger sessionLogger = org.apache.logging.log4j.LogManager.getContext().getLogger(GlobalConstants.HostLog_DB);
+		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
-		//Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		//Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 		AMIvrIntraction amivr1 = new AMIvrIntraction();
 		try {
 			StoredProcedureQuery getDetails = em.createNamedStoredProcedureQuery("GET_CUST_TVAL_SP")
@@ -781,7 +774,7 @@ public class DBServiceImpl implements DBService {
 	@Transactional(value = "transactionManager")
 	@Override
 	public AMIvrIntraction_Res getAMIvrHostRes(AMIvrIntraction amivr) throws Exception {
-		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+		Logger sessionLogger = CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 		
 		AMIvrIntraction_Res amIvrIntraction_Res = new AMIvrIntraction_Res();
 		AMIvrIntraction amivr1 = new AMIvrIntraction();
@@ -846,7 +839,7 @@ public class DBServiceImpl implements DBService {
 	public IncomingPoints_Res getIncomingPoints(Map<String, Object> inParams) {
 		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
 				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+				: CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
 		IncomingPoints_Res res = new IncomingPoints_Res();
 		List<IncomingPoints> incomingPointsList = new ArrayList<>();
@@ -913,7 +906,7 @@ public class DBServiceImpl implements DBService {
 	public TransferPoints_Res getTransferPoints(Map<String, Object> inParams) {
 		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
 				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+				: CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
 		TransferPoints_Res res = new TransferPoints_Res();
 		List<TransferPoints> transferPointsList = new ArrayList<>();
@@ -983,7 +976,7 @@ public class DBServiceImpl implements DBService {
 		
 		Logger sessionLogger = reqObj != null && reqObj.getSessionId() != null
 				? CustomLogger.getLogger(reqObj.getSessionId().toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+				: CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 				
 		BusinessHrsCheck_Res res = new BusinessHrsCheck_Res();
 
@@ -1128,7 +1121,7 @@ public class DBServiceImpl implements DBService {
 
 		Logger sessionLogger = contextCTI_Req != null && contextCTI_Req.getSession_id() != null
 				? CustomLogger.getLogger(contextCTI_Req.getSession_id().toString())
-				: CustomLogger.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+				: CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
 		String status = "";
 		sessionLogger.debug(utilities.getCurrentClassAndMethodName() + " UCID : " + contextCTI_Req.getUcid());
@@ -1157,8 +1150,7 @@ public class DBServiceImpl implements DBService {
 
 		Logger sessionLogger = inParams != null && inParams.get("sessionId") != null
 				? CustomLogger.getLogger(inParams.get("sessionId").toString())
-				: CustomLogger
-						.getLogger(GlobalConstants.HostLog_DB + new SimpleDateFormat("yyyyMMdd").format(new Date()));
+				: CustomLogger.getLogger(GlobalConstants.HostLog_DB);
 
 		sessionLogger.debug(utilities.getCurrentClassAndMethodName() + " Started: " + inParams);
 

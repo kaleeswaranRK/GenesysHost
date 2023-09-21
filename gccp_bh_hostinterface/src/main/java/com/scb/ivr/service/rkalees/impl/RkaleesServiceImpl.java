@@ -36,7 +36,6 @@ import com.scb.ivr.controller.DBController;
 import com.scb.ivr.exception.CustomException;
 import com.scb.ivr.global.constants.GlobalConstants;
 import com.scb.ivr.log.custom.CustomLogger;
-import com.scb.ivr.model.c400.res.custidentifycardnum.CustIdentificationCardNumResponseData;
 import com.scb.ivr.model.rkalees.cardLost_Req;
 import com.scb.ivr.model.rkalees.cardLost_Res;
 import com.scb.ivr.model.rkalees.res.cardLost.CardLostResponseData;
@@ -225,19 +224,18 @@ public class RkaleesServiceImpl implements RkaleesService {
 										+ " Error While Accessing HTTP Service : "
 										+ response.getStatusLine().getStatusCode());
 							}
-						} else if(response.getStatusLine().getStatusCode()==204) {
+						} else if (response.getStatusLine().getStatusCode() == 204) {
 							resObj.setErrorcode(String.valueOf(response.getStatusLine().getStatusCode()));
 							resObj.setErrormessage(GlobalConstants.ERRORCODE_HOST_CARD_NOT_VALID_700074);
-						}
-						else {
+						} else {
 							resObj.setErrorcode(GlobalConstants.FAILURECODE);
 							resObj.setErrormessage(GlobalConstants.FAILURE);
 						}
 					} else {
 						resObj.setErrorcode(GlobalConstants.FAILURECODE);
 						resObj.setErrormessage(GlobalConstants.FAILURE);
-						sessionLogger.debug(utilities.getCurrentClassAndMethodName()
-								+ " Error While Accessing HTTP Service : " + response.getStatusLine().getStatusCode());
+						sessionLogger.debug(
+								utilities.getCurrentClassAndMethodName() + " Error While Accessing HTTP Service  ");
 					}
 					if (responseMessage != null && responseMessage.getEntity() != null
 							&& !responseMessage.getEntity().toString().equalsIgnoreCase("")) {
@@ -247,38 +245,22 @@ public class RkaleesServiceImpl implements RkaleesService {
 
 						ObjectMapper objectMapper = new ObjectMapper();
 						objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-
-						/***
-						 * check status code from endPoint API response.
-						 * 
-						 * if the status code is 200 or 201, received success response. mapping the
-						 * success code and return to IVR. otherwise error message received from
-						 * endPoint. mapping that error message data and return to IVR.
-						 * 
-						 ****/
-
-						if (responseMessage.getStatus() == 200 || responseMessage.getStatus() == 201) {
-							CardLostResponseData dataObjects = objectMapper
-									.readValue(responseMessage.getEntity().toString(), CardLostResponseData.class);
-							if (dataObjects != null) {
-								resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
-								resObj.setErrormessage(GlobalConstants.SUCCESS);
-								resObj.setResponse(dataObjects);
-							} else {
-								resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
-								resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
-							}
+						cardLost_Res dataObjects = objectMapper.readValue(responseMessage.getEntity().toString(),
+								cardLost_Res.class);
+						if (dataObjects != null && "200".equalsIgnoreCase(dataObjects.getErrorcode())
+								&& dataObjects.getResponse() != null) {
+							resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
+							resObj.setErrormessage(GlobalConstants.SUCCESS);
+							resObj.setResponse(dataObjects.getResponse());
 						} else {
 							resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
 							resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
 						}
-
 					} else {
-						sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". Empty Response");
-						resObj.setErrorcode(GlobalConstants.ERRORCODE_RESPONSE_IS_EMPTY_700015);
-						resObj.setErrormessage(
-								GlobalConstants.FAILURE + ". " + "Response is Null, Setting Failure code");
+						resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
+						resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
 					}
+
 				} catch (SocketException e) {
 					sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
 							+ ". Socket Exception MSG IS " + e.getMessage(), e);

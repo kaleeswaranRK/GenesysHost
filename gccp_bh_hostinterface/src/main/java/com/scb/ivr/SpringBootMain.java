@@ -119,7 +119,7 @@ public class SpringBootMain {
 //		System.setProperty("log4jpath", "C:\\Users\\1636022\\Documents\\Ganesh\\BH\\Logs\\");
 
 		/**** RKALEES ****/
-//		sb1.setCardLost(context);
+		sb1.setCardLost(context);
 
 		/**** cards400 ****/
 		// sb1.getCustomerIdentificationCardNum(context);
@@ -209,10 +209,10 @@ public class SpringBootMain {
 		reqObj.setHotline("89899899001");
 
 		res = controller.getCustomerIdentificationCardNum(reqObj);
-		System.out.println("*********CustomerIdentificationCardNum Response:**********");
+		System.out.println("*********CustomerIdentificationCardNum Response**********");
 		System.out.println("Error code : " + res.getErrorcode());
 		System.out.println("Error MSG : " + res.getErrormessage());
-		System.out.println("*********CustomerIdentificationCardNum Response END:**********");
+		System.out.println("*********CustomerIdentificationCardNum Response END**********");
 
 		ObjectMapper obj = new ObjectMapper();
 		try {
@@ -232,11 +232,11 @@ public class SpringBootMain {
 		reqObj.setUcid(ucid);
 		reqObj.setHotline("89899899001");
 		reqObj.setUserId("100000012");
+		System.out.println("*********setCardLost START**********");
 		res = controller.setCardLost(reqObj);
-		System.out.println("*********setCardLost Response:**********");
 		System.out.println("Error code : " + res.getErrorcode());
 		System.out.println("Error MSG : " + res.getErrormessage());
-		System.out.println("*********setCardLost Response END:**********");
+		System.out.println("*********setCardLost END**********");
 
 		ObjectMapper obj = new ObjectMapper();
 		try {

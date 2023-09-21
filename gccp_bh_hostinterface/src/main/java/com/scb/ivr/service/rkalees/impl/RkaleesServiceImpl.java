@@ -258,7 +258,7 @@ public class RkaleesServiceImpl implements RkaleesService {
 						}
 					} else {
 						resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
-						resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
+						resObj.setErrormessage(GlobalConstants.FAILURE);
 					}
 
 				} catch (SocketException e) {

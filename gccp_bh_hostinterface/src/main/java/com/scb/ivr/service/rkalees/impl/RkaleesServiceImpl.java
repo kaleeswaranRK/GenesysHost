@@ -204,7 +204,6 @@ public class RkaleesServiceImpl implements RkaleesService {
 					CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 					CloseableHttpResponse response = httpClient.execute(httpPost);
 					System.out.println("host return ...");
-					System.out.println("Response : " + response);
 					String strResponse = "";
 
 					if (response != null) {
@@ -217,6 +216,7 @@ public class RkaleesServiceImpl implements RkaleesService {
 										.entity(strResponse).build();
 								resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
 								resObj.setErrormessage(GlobalConstants.SUCCESS);
+
 							} else {
 								resObj.setErrorcode(GlobalConstants.ERRORCODE_NULLPOINTEREXCEPTION_700004);
 								resObj.setErrormessage(GlobalConstants.SUCCESS);
@@ -239,10 +239,8 @@ public class RkaleesServiceImpl implements RkaleesService {
 					}
 					if (responseMessage != null && responseMessage.getEntity() != null
 							&& !responseMessage.getEntity().toString().equalsIgnoreCase("")) {
-
 						sessionLogger.info(utilities.getCurrentClassAndMethodName() + ". Response : "
 								+ responseMessage.getEntity().toString());
-
 						ObjectMapper objectMapper = new ObjectMapper();
 						objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
 						cardLost_Res dataObjects = objectMapper.readValue(responseMessage.getEntity().toString(),
@@ -252,9 +250,13 @@ public class RkaleesServiceImpl implements RkaleesService {
 							resObj.setErrorcode(GlobalConstants.SUCCESSCODE);
 							resObj.setErrormessage(GlobalConstants.SUCCESS);
 							resObj.setResponse(dataObjects.getResponse());
-						} else {
+						} 
+						 else if("404".equalsIgnoreCase(dataObjects.getErrorcode())){
+								resObj.setErrorcode(GlobalConstants.ERRORCODE_DUMMY_FILE_RESPONSE_NOT_FOUND_700013);
+								resObj.setErrormessage(GlobalConstants.FAILURE);
+							}else {
 							resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
-							resObj.setErrormessage(GlobalConstants.FAILURE + ". " + responseMessage.getStatus());
+							resObj.setErrormessage(GlobalConstants.FAILURE);
 						}
 					} else {
 						resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);

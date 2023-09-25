@@ -227,7 +227,7 @@ public class SpringBootMain {
 		String ucid = "0000" + new SimpleDateFormat("ddMMyyyyhhmmssss").format(new Date());
 		cardLost_Req reqObj = new cardLost_Req();
 		cardLost_Res res = new cardLost_Res();
-		reqObj.setCardNo("5371780000198990");
+		reqObj.setCardNo("5371780000198998");
 		reqObj.setSessionId(ucid);
 		reqObj.setUcid(ucid);
 		reqObj.setHotline("89899899001");

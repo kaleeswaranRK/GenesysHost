@@ -224,13 +224,14 @@ public class RkaleesServiceImpl implements RkaleesService {
 										+ " Error While Accessing HTTP Service : "
 										+ response.getStatusLine().getStatusCode());
 							}
-						} else if (response.getStatusLine().getStatusCode() == 204) {
-							resObj.setErrorcode(String.valueOf(response.getStatusLine().getStatusCode()));
+						} else if (response.getStatusLine().getStatusCode() == 404) {
+							resObj.setErrorcode(GlobalConstants.ERRORCODE_DUMMY_FILE_RESPONSE_NOT_FOUND_700013);
 							resObj.setErrormessage(GlobalConstants.ERRORCODE_HOST_CARD_NOT_VALID_700074);
 						} else {
 							resObj.setErrorcode(GlobalConstants.FAILURECODE);
 							resObj.setErrormessage(GlobalConstants.FAILURE);
 						}
+						System.out.println("+++++++++++++++++++++++++++++response object : "+resObj);
 					} else {
 						resObj.setErrorcode(GlobalConstants.FAILURECODE);
 						resObj.setErrormessage(GlobalConstants.FAILURE);
@@ -253,15 +254,13 @@ public class RkaleesServiceImpl implements RkaleesService {
 						} 
 						 else if("404".equalsIgnoreCase(dataObjects.getErrorcode())){
 								resObj.setErrorcode(GlobalConstants.ERRORCODE_DUMMY_FILE_RESPONSE_NOT_FOUND_700013);
-								resObj.setErrormessage(GlobalConstants.FAILURE);
+								resObj.setErrormessage(GlobalConstants.ERRORCODE_HOST_CARD_NOT_VALID_700074);
 							}else {
 							resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
 							resObj.setErrormessage(GlobalConstants.FAILURE);
 						}
-					} else {
-						resObj.setErrorcode(GlobalConstants.FAILURECODE_UNKNOWN);
-						resObj.setErrormessage(GlobalConstants.FAILURE);
-					}
+					} 
+					System.out.println("+++++++++++++++++++++++++++++response object : "+resObj);
 
 				} catch (SocketException e) {
 					sessionLogger.error("SESSION ID : " + sessionId + " " + utilities.getCurrentClassAndMethodName()
@@ -312,6 +311,7 @@ public class RkaleesServiceImpl implements RkaleesService {
 
 		} finally {
 			try {
+				System.out.println("+++++++++++++++++++++++++++++response object : "+resObj);
 				sessionLogger.debug(utilities.getCurrentClassAndMethodName() + " DB Host insertion started ");
 
 				/**

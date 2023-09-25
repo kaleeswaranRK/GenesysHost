@@ -104,28 +104,22 @@ public class SpringBootMain {
 	public static void main(String[] args) throws Exception {
 		System.setProperty("log4jpath", "D:/Genesys/HostLogs");
 		System.setProperty("logxmlPath", "D:/Subbu/config/log4j2.xml");
-
 		ApplicationContext context = SpringApplication.run(SpringBootMain.class, args);
-
 		SpringBootMain sb1 = new SpringBootMain();
 		// String logpath = System.getenv("logPath");
-
 		// System.setProperty("log4jpath", logpath);
-
 		// System.setProperty("log4jpath", "C:\\Users\\1665257\\OneDrive - Standard
 		// Chartered Bank\\Documents\\Raja\\BH\\logs\\");
-		// System.setProperty("log4jpath",
-		// "C:\\Users\\1665256\\Kalaivanan\\BH\\LOGS\\");
-//		System.setProperty("log4jpath", "C:\\Users\\1636022\\Documents\\Ganesh\\BH\\Logs\\");
+		// System.setProperty("log4jpath","C:\\Users\\1665256\\Kalaivanan\\BH\\LOGS\\");
+		// System.setProperty("log4jpath", "C:\\Users\\1636022\\Documents\\Ganesh\\BH\\Logs\\");
 
 		/**** RKALEES ****/
-//		sb1.setCardLost(context);
+		sb1.setCardLost(context);
 
 		/**** cards400 ****/
 		// sb1.getCustomerIdentificationCardNum(context);
 		// sb1.getCreditCardList(context);
 		// sb1.getCreditCardBalance(context);
-
 		// sb1.getCreditCardBalanceList(context);
 
 		/**** EBBS ****/
@@ -204,7 +198,7 @@ public class SpringBootMain {
 		CustomerIdentificationCardNum_Req reqObj = new CustomerIdentificationCardNum_Req();
 		CustomerIdentificationCardNum_Res res = new CustomerIdentificationCardNum_Res();
 		/// reqObj.setCardNumber("5371780000198991");
-		reqObj.setCardNumber("5371780000198991");
+		reqObj.setCardNumber("1234567890123456");
 		reqObj.setSessionId(ucid);
 		reqObj.setHotline("89899899001");
 
